@@ -39,7 +39,7 @@ export default function Navbar() {
           <a href="#" className="text-white hover:text-purple-400 transition-colors">Events</a>
         </div>
 
-        <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
+        <div className="w-16 h-16 rounded-full flex items-center justify-center">
           <img src={logo} alt="Logo" className='rounded-full'/>
         </div>
 
@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="md:hidden">
         <div className="flex justify-center mb-4">
           <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold">SPARK</span>
+           <img src={logo} alt="Logo" className='rounded-full'/>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function Navbar() {
             setIsOpen(!isOpen)
             if (!isOpen) setActiveIndex(-1)
           }}
-          className="fixed top-4 right-4 z-50 bg-purple-600 text-white p-2 rounded-full hover:bg-purple-700 transition-colors"
+          className="fixed top-4 right-4 z-50  text-white p-2 rounded-full transition-colors"
         >
           <Menu size={24} />
         </button>
