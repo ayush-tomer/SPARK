@@ -5,7 +5,7 @@ import {
   DeleteProject,
   GetProject,
   GetProjects,
-} from "../Controllers/projects.Controllers";
+} from "../Controllers/projects.Controllers.js";
 
 import adminAuthenticate from "../Middlewares/admin.middleware.js";
 
@@ -21,7 +21,7 @@ router.put("/update-project/:id", adminAuthenticate, UpdateProject);
 router.delete("/delete-project/:id", adminAuthenticate, DeleteProject);
 
 //Get-All Project :
-router.get("/getAll-project", adminAuthenticate, GetProjects);
+router.get("/getAll-project", GetProjects);
 
 //get-Single Project:
 router.get("/getSingle-project/:id", adminAuthenticate, GetProject);

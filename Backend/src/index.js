@@ -6,6 +6,7 @@ import ConnectDB from "./Lib/db.js";
 
 //Routes :
 import authRoutes from "./Routes/auth.Route.js";
+import projectsRoutes from "./Routes/projects.Route.js";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectsRoutes);
 
 app.listen(PORT || process.env.PORT, () => {
   console.log(`Server is running on PORT : ${PORT}`);

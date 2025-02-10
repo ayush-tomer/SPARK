@@ -39,7 +39,7 @@ export const CreateProject = async (req, res) => {
 };
 
 //Updating Movie :
-export const Update = async (req, res) => {
+export const UpdateProject = async (req, res) => {
   const { id } = req.params;
   const { Name, author, description, TechStack, GitHub, ProblemStatement } =
     req.body;
@@ -139,10 +139,10 @@ export const GetProjects = async (req, res) => {
 };
 
 //GetSingle :
-export const GetSingle = async (req, res) => {
+export const GetProject = async (req, res) => {
   const { id } = req.params;
   try {
-    const project = await Projects.find();
+    const project = await Projects.find(id);
     if (!project) {
       return res
         .status(400)
