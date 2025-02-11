@@ -12,7 +12,7 @@ import adminAuthenticate from "../Middlewares/admin.middleware.js";
 const router = express.Router();
 
 //Create Project :
-router.post("/create-project/:id", adminAuthenticate, CreateProject);
+router.post("/create-project", adminAuthenticate, CreateProject);
 
 //Update Product :
 router.put("/update-project/:id", adminAuthenticate, UpdateProject);
@@ -24,6 +24,6 @@ router.delete("/delete-project/:id", adminAuthenticate, DeleteProject);
 router.get("/getAll-project", GetProjects);
 
 //get-Single Project:
-router.get("/getSingle-project/:id", adminAuthenticate, GetProject);
+router.get("/getSingle-project/:id", GetProject);
 
 export default router;
