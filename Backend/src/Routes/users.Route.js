@@ -10,10 +10,10 @@ import {
 const router = express.Router();
 
 //Get All Users
-router.get("/getAll-Users", GetUsers);
+router.get("/getAll-Users", adminAuthenticate, GetUsers);
 
 //Get Single User
-router.get("/getSingle-User/:id", GetUser);
+router.get("/getSingle-User/:id", adminAuthenticate, GetUser);
 
 //Delete User :
 router.delete("/delete-user/:id", adminAuthenticate, DeleteUser);
