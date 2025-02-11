@@ -24,6 +24,6 @@ router.delete("/delete-project/:id", adminAuthenticate, DeleteProject);
 router.get("/getAll-project", GetProjects);
 
 //get-Single Project:
-router.get("/getSingle-project/:id", adminAuthenticate, GetProject);
+router.get("/getSingle-project/:id", GetProject);
 
 export default router;

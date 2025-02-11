@@ -59,7 +59,7 @@ export const UpdateProject = async (req, res) => {
         .json({ message: "No field can be empty", error: true });
     }
 
-    const project = await Projects.findById({ id });
+    const project = await Projects.findById({ _id: id });
     if (!project) {
       return res
         .status(400)
@@ -106,7 +106,7 @@ export const UpdateProject = async (req, res) => {
 export const DeleteProject = async (req, res) => {
   const { id } = req.params;
   try {
-    const project = await Projects.findById({ id });
+    const project = await Projects.findById({ _id: id });
 
     if (!project) {
       return res
@@ -114,7 +114,7 @@ export const DeleteProject = async (req, res) => {
         .json({ message: "No such project exists", error: true });
     }
 
-    await Projects.deleteById({ id });
+    await Projects.findByIdAndDelete({ _id: id });
 
     res
       .status(200)
@@ -144,7 +144,7 @@ export const GetProjects = async (req, res) => {
 export const GetProject = async (req, res) => {
   const { id } = req.params;
   try {
-    const project = await Projects.find(id);
+    const project = await Projects.findOne({ _id: id });
     if (!project) {
       return res
         .status(400)
