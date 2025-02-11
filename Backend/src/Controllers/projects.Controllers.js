@@ -29,13 +29,11 @@ export const CreateProject = async (req, res) => {
 
     await project.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Project has been created",
-        error: false,
-        data: project,
-      });
+    res.status(200).json({
+      message: "Project has been created",
+      error: false,
+      data: project,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Issue", error: true });
@@ -61,11 +59,11 @@ export const UpdateProject = async (req, res) => {
         .json({ message: "No field can be empty", error: true });
     }
 
-    const project = await Projects.findOne({ id });
+    const project = await Projects.findById({ id });
     if (!project) {
       return res
         .status(400)
-        .json({ message: "No such Movie found", error: true });
+        .json({ message: "No such Project found", error: true });
     }
 
     if (Name) {
@@ -88,7 +86,7 @@ export const UpdateProject = async (req, res) => {
       project.GitHub = GitHub;
     }
 
-    if (TechStack) {
+    if (ProblemStatement) {
       project.ProblemStatement = ProblemStatement;
     }
 
@@ -108,15 +106,15 @@ export const UpdateProject = async (req, res) => {
 export const DeleteProject = async (req, res) => {
   const { id } = req.params;
   try {
-    const project = await Projects.findOne({ id });
+    const project = await Projects.findById({ id });
 
     if (!project) {
       return res
         .status(500)
-        .json({ message: "No such Movie exists", error: true });
+        .json({ message: "No such project exists", error: true });
     }
 
-    await Projects.deleteOne({ id });
+    await Projects.deleteById({ id });
 
     res
       .status(200)
