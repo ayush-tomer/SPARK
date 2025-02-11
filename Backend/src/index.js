@@ -8,6 +8,7 @@ import ConnectDB from "./Lib/db.js";
 import authRoutes from "./Routes/auth.Route.js";
 import projectsRoutes from "./Routes/projects.Route.js";
 import userRoutes from "./Routes/users.Route.js";
+import eventsRoutes from "./Routes/events.Route.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectsRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/Events", eventsRoutes);
 
 app.listen(PORT || process.env.PORT, () => {
   console.log(`Server is running on PORT : ${PORT}`);
