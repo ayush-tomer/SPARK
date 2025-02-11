@@ -31,7 +31,11 @@ export const CreateProject = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Project has been created", error: false, data: movie });
+      .json({
+        message: "Project has been created",
+        error: false,
+        data: project,
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Issue", error: true });
