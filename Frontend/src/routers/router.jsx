@@ -1,4 +1,4 @@
-import { createBrowser } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
 import Home from "../pages/Home.jsx";
 import Login from "../pages/Login.jsx";
@@ -13,7 +13,7 @@ import Profile from "../pages/Profile.jsx";
 import Internships from "../pages/Internships.jsx";
 import AboutUs from "../pages/AboutUs.jsx";
 
-const router = createBrowser([
+const router = createBrowserRouter ([
   {
     path: "/",
     element: <App />,
