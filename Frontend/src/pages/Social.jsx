@@ -1,9 +1,7 @@
 import React from 'react'
 
-function Social() {
+export default function Social() {
   return (
     <div>Social</div>
   )
 }
-
-export default Social

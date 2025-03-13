@@ -13,7 +13,7 @@ export default function Navbar() {
     { name: "Events", path: "/events" },
     { name: "Projects", path: "/projects" },
     { name: "About Us", path: "/AboutUs" },
-    { name: "SignUp", path: "/register" },
+    { name: "SignUp", path: "/login" },
   ];
 
   useEffect(() => {
@@ -41,23 +41,23 @@ export default function Navbar() {
           <Link to="/events" className="text-white hover:text-purple-400 transition-colors">Events</Link>
         </div>
 
-        <div className="w-16 h-16 rounded-full flex items-center justify-center">
+        <Link to='/' className="w-16 h-16 rounded-full flex items-center justify-center">
           <img src={logo} alt="Logo" className="rounded-full" />
-        </div>
+        </Link>
 
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
           <Link to="/projects" className="text-white hover:text-purple-400 transition-colors">Projects</Link>
           <Link to="/AboutUs" className="text-white hover:text-purple-400 transition-colors">About Us</Link>
-          <Link to="/register" className="text-white hover:text-purple-400 transition-colors">SignUp</Link>
+          <Link to="/login" className="text-white hover:text-purple-400 transition-colors">SignUp</Link>
         </div>
       </div>
 
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
+          <Link to="/" className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
             <img src={logo} alt="Logo" className="rounded-full" />
-          </div>
+          </Link>
         </div>
 
         <button
