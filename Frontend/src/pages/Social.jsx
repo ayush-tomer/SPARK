@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { getUserData } from "../auth";
 import {
   Heart,
   MessageCircle,
@@ -40,6 +41,13 @@ export default function SocialFeed() {
   const [showEditEmojiPicker, setShowEditEmojiPicker] = useState(false);
   const [showCommentEmojiPicker, setShowCommentEmojiPicker] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getUserData()
+      .then((userData) => setUser(userData))
+      .catch((err) => console.error(err));
+  }, []);
 
   // Sample emojis for the emoji picker
   const emojis = [
@@ -145,8 +153,8 @@ export default function SocialFeed() {
     if (newPostCaption.trim() !== "" || newPostImage !== "") {
       const newPost = {
         id: Date.now().toString(),
-        username: "currentuser",
-        name: "Current User",
+        // username: "currentuser",
+        // name: "Current User",
         profilePic: "/placeholder.svg?height=40&width=40",
         image: newPostImage || "",
         caption: newPostCaption,
@@ -242,8 +250,8 @@ export default function SocialFeed() {
                 ...post.comments,
                 {
                   id: `c${Date.now()}`,
-                  username: "currentuser",
-                  name: "Current User",
+                  // username: "currentuser",
+                  // name: "Current User",
                   profilePic: "/placeholder.svg?height=40&width=40",
                   text: commentText,
                   timestamp: new Date(),
@@ -587,7 +595,7 @@ export default function SocialFeed() {
                     <div className="h-full w-full rounded-full overflow-hidden border-2 border-gray-900">
                       <img
                         src={post.profilePic || "/placeholder.svg"}
-                        alt={`@${post.username}`}
+                        alt={`@${user.username}`}
                         className="h-full w-full object-cover"
                       />
                     </div>
@@ -598,7 +606,7 @@ export default function SocialFeed() {
                       <span className="font-bold text-gray-200 hover:underline cursor-pointer">
                         {post.name}
                       </span>
-                      <span className="text-gray-400">@{post.username}</span>
+                      <span className="text-gray-400">@{user.username}</span>
                       <span className="text-gray-500">•</span>
                       <span className="text-gray-400 hover:underline cursor-pointer">
                         {formatTimestamp(post.timestamp)}
@@ -733,7 +741,7 @@ export default function SocialFeed() {
                           <div className="h-full w-full rounded-full overflow-hidden border border-gray-900">
                             <img
                               src={comment.profilePic || "/placeholder.svg"}
-                              alt={`@${comment.username}`}
+                              alt={`@${user.username}`}
                               className="h-full w-full object-cover"
                             />
                           </div>
@@ -745,7 +753,7 @@ export default function SocialFeed() {
                                 {comment.name}
                               </span>
                               <span className="text-gray-400">
-                                @{comment.username}
+                                @{user.username}
                               </span>
                               <span className="text-gray-500">•</span>
                               <span className="text-gray-400 hover:underline cursor-pointer">

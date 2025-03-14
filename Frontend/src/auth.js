@@ -1,5 +1,6 @@
 import {
     getAuth,
+    onAuthStateChanged ,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
@@ -91,3 +92,28 @@ import {
     }
   };
   
+  export const getUserData = async () => {
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          try {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              console.log("✅ User Data:", userData);
+              resolve(userData);
+            } else {
+              console.error("❌ User data not found!");
+              reject("User data not found");
+            }
+          } catch (error) {
+            console.error("❌ Error fetching user data:", error);
+            reject(error.message);
+          }
+        } else {
+          console.log("❌ No user logged in");
+          reject("No user logged in");
+        }
+      });
+    });
+  };
