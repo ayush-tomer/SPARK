@@ -21,6 +21,10 @@ const CommunityScehama = new mongoose.Schema({
     type: String,
     required: true,
   },
+  college:{
+    type: String,
+    required: true,
+  }
 });
 
 const Community = mongoose.model("Community", CommunityScehama);
