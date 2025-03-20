@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
@@ -34,7 +35,9 @@ export default function Navbar() {
     { name: "Events", path: "/events" },
     { name: "Projects", path: "/projects" },
     { name: "Internships", path: "/internships" },
-    user ? { name: "Logout", path: "#", action: handleLogout } : { name: "SignIn", path: "/login" },
+    user
+      ? { name: "Logout", path: "#", action: handleLogout }
+      : { name: "SignIn", path: "/login" },
   ];
 
   useEffect(() => {
@@ -57,22 +60,60 @@ export default function Navbar() {
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-center items-center space-x-8">
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
-          <Link to="/social" className="text-white hover:text-purple-400 transition-colors">Social</Link>
-          <Link to="/community" className="text-white hover:text-purple-400 transition-colors">Community</Link>
-          <Link to="/events" className="text-white hover:text-purple-400 transition-colors">Events</Link>
+          <Link
+            to="/social"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Social
+          </Link>
+          <Link
+            to="/community"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Community
+          </Link>
+          <Link
+            to="/events"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Events
+          </Link>
         </div>
 
-        <Link to='/' className="w-16 h-16 rounded-full flex items-center justify-center">
+        <Link
+          to="/"
+          className="w-16 h-16 rounded-full flex items-center justify-center"
+        >
           <img src={logo} alt="Logo" className="rounded-full" />
         </Link>
 
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
-          <Link to="/projects" className="text-white hover:text-purple-400 transition-colors">Projects</Link>
-          <Link to="/internships" className="text-white hover:text-purple-400 transition-colors">Internships</Link>
+          <Link
+            to="/projects"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Projects
+          </Link>
+          <Link
+            to="/internships"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Internships
+          </Link>
           {user ? (
-            <button onClick={handleLogout} className="text-white hover:text-purple-400 transition-colors">Logout</button>
+            <button
+              onClick={handleLogout}
+              className="text-white hover:text-purple-400 transition-colors"
+            >
+              Logout
+            </button>
           ) : (
-            <Link to="/login" className="text-white hover:text-purple-400 transition-colors">SignIn</Link>
+            <Link
+              to="/login"
+              className="text-white hover:text-purple-400 transition-colors"
+            >
+              SignIn
+            </Link>
           )}
         </div>
       </div>
@@ -80,12 +121,23 @@ export default function Navbar() {
       {/* Profile Icon - Desktop (Right) */}
       <div className="hidden md:flex fixed top-7 right-7">
         {user ? (
-          <Link to="/profile" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer">
-            {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+          <Link
+            to="/profile"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
+          >
+            {user.displayName?.charAt(0).toUpperCase() ||
+              user.email?.charAt(0).toUpperCase()}
           </Link>
         ) : (
-          <div onClick={handleGuestClick} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
-            <img src={unknownUser} alt="Guest" className="w-10 h-10 rounded-full" />
+          <div
+            onClick={handleGuestClick}
+            className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
+          >
+            <img
+              src={unknownUser}
+              alt="Guest"
+              className="w-10 h-10 rounded-full"
+            />
           </div>
         )}
       </div>
@@ -93,12 +145,23 @@ export default function Navbar() {
       {/* Profile Icon - Mobile (Left) */}
       <div className="md:hidden fixed top-5 left-5">
         {user ? (
-          <Link to="/profile" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer">
-            {user.displayName?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase()}
+          <Link
+            to="/profile"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
+          >
+            {user.displayName?.charAt(0).toUpperCase() ||
+              user.email?.charAt(0).toUpperCase()}
           </Link>
         ) : (
-          <div onClick={handleGuestClick} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
-            <img src={unknownUser} alt="Guest" className="w-10 h-10 rounded-full" />
+          <div
+            onClick={handleGuestClick}
+            className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
+          >
+            <img
+              src={unknownUser}
+              alt="Guest"
+              className="w-10 h-10 rounded-full"
+            />
           </div>
         )}
       </div>
@@ -106,7 +169,10 @@ export default function Navbar() {
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="flex justify-center mb-4">
-          <Link to="/" className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
+          <Link
+            to="/"
+            className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center"
+          >
             <img src={logo} alt="Logo" className="rounded-full" />
           </Link>
         </div>

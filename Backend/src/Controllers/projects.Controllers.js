@@ -2,8 +2,15 @@ import Projects from "../Models/projects.model.js";
 
 //Posting of Project :
 export const CreateProject = async (req, res) => {
-  const { Name, author, description, TechStack, GitHub, ProblemStatement } =
-    req.body;
+  const {
+    Name,
+    author,
+    description,
+    TechStack,
+    GitHub,
+    ProblemStatement,
+    category,
+  } = req.body;
   try {
     if (
       !Name ||
@@ -11,7 +18,8 @@ export const CreateProject = async (req, res) => {
       !description ||
       !TechStack ||
       !GitHub ||
-      !ProblemStatement
+      !ProblemStatement ||
+      !category
     ) {
       return res
         .status(400)
@@ -25,6 +33,7 @@ export const CreateProject = async (req, res) => {
       TechStack,
       GitHub,
       ProblemStatement,
+      category,
     });
 
     await project.save();
@@ -43,8 +52,15 @@ export const CreateProject = async (req, res) => {
 //Updating Movie :
 export const UpdateProject = async (req, res) => {
   const { id } = req.params;
-  const { Name, author, description, TechStack, GitHub, ProblemStatement } =
-    req.body;
+  const {
+    Name,
+    author,
+    description,
+    TechStack,
+    GitHub,
+    ProblemStatement,
+    category,
+  } = req.body;
   try {
     if (
       !Name &&
@@ -52,7 +68,8 @@ export const UpdateProject = async (req, res) => {
       !description &&
       !TechStack &&
       !GitHub &&
-      !ProblemStatement
+      !ProblemStatement &&
+      !category
     ) {
       return res
         .status(400)
@@ -88,6 +105,9 @@ export const UpdateProject = async (req, res) => {
 
     if (ProblemStatement) {
       project.ProblemStatement = ProblemStatement;
+    }
+    if (category) {
+      project.category = category;
     }
 
     await project.save();

@@ -25,6 +25,10 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
 });
 
 const Projects = mongoose.model("Projects", ProjectSchema);

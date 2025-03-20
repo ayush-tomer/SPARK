@@ -1,46 +1,56 @@
-"use client"
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
-import { MapPin, Calendar, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, X } from "lucide-react"
-import React from "react"
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import {
+  MapPin,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  X,
+} from "lucide-react";
+import React from "react";
 
 export default function InternshipCard({ internship }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [showApplyDialog, setShowApplyDialog] = useState(false)
-  const [currentImage, setCurrentImage] = useState(0)
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showApplyDialog, setShowApplyDialog] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
   const [formData, setFormData] = useState({
     communication: "",
     joinReason: "",
     experience: "",
-  })
+  });
 
-  const cardRef = React.useRef(null)
-  const isInView = useInView(cardRef, { once: true, amount: 0.3 })
+  const cardRef = React.useRef(null);
+  const isInView = useInView(cardRef, { once: true, amount: 0.3 });
 
-  const images = internship.images || [internship.image]
+  const images = internship.images || [internship.image];
 
   useEffect(() => {
     if (images.length > 1) {
       const interval = setInterval(() => {
-        setCurrentImage((prev) => (prev + 1) % images.length)
-      }, 3000)
-      return () => clearInterval(interval)
+        setCurrentImage((prev) => (prev + 1) % images.length);
+      }, 3000);
+      return () => clearInterval(interval);
     }
-  }, [images])
+  }, [images]);
 
-  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length)
-  const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
+  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
+  const prevImage = () =>
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    alert("Application submitted successfully!")
-    setShowApplyDialog(false)
-  }
+    e.preventDefault();
+    alert("Application submitted successfully!");
+    setShowApplyDialog(false);
+  };
 
   return (
     <>
@@ -97,8 +107,12 @@ export default function InternshipCard({ internship }) {
 
         {/* Content Section */}
         <div className="p-6">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">{internship.title}</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{internship.description}</p>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+            {internship.title}
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            {internship.description}
+          </p>
 
           {/* Additional Info */}
           <div className="flex flex-col gap-2 text-sm text-gray-700 dark:text-gray-300">
@@ -122,7 +136,11 @@ export default function InternshipCard({ internship }) {
             className="flex items-center gap-1 mt-4 text-sm font-medium text-purple-600 hover:text-purple-800 transition-colors"
           >
             {isExpanded ? "Hide Details" : "Show Details"}
-            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {isExpanded ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
           </button>
 
           {/* Expanded Content */}
@@ -135,7 +153,9 @@ export default function InternshipCard({ internship }) {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="font-medium text-gray-800 dark:text-white mb-2">Requirements:</h3>
+                <h3 className="font-medium text-gray-800 dark:text-white mb-2">
+                  Requirements:
+                </h3>
                 <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 mb-4">
                   {internship.requirements?.map((req, index) => (
                     <motion.li
@@ -188,7 +208,9 @@ export default function InternshipCard({ internship }) {
                 <X className="h-5 w-5" />
               </button>
 
-              <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-6">Apply for {internship.title}</h2>
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-6">
+                Apply for {internship.title}
+              </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
@@ -223,7 +245,8 @@ export default function InternshipCard({ internship }) {
 
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    What is your previous experience/proof of skill for this role?
+                    What is your previous experience/proof of skill for this
+                    role?
                   </label>
                   <textarea
                     name="experience"
@@ -250,6 +273,5 @@ export default function InternshipCard({ internship }) {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
-
