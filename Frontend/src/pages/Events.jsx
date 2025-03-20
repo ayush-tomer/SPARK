@@ -14,7 +14,11 @@ import {
 import RollingGallery from "../components/RollingGallery";
 import { EventButton } from "../components/EventButton";
 import events from "../json/events";
-import EventButtonWithForm from "../components/EventAdd";
+import {
+  CustomButton,
+  EventFormModal,
+  EventCards,
+} from "../components/EventAdd";
 
 // Event Card Component
 const EventCard = ({ event }) => {
@@ -126,6 +130,22 @@ const EventCard = ({ event }) => {
 
 // Main Events Page Component
 export default function Events() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [eventData, setEventData] = useState(null);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitEvent = (data) => {
+    setEventData(data);
+    console.log("Event data submitted:", data);
+  };
+
   return (
     <div className="min-h-screen mt-10 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -142,12 +162,27 @@ export default function Events() {
         </div>
 
         <RollingGallery autoplay={true} pauseOnHover={true} />
-        <EventButtonWithForm />
+        <div className="flex justify-center mb-8">
+          <CustomButton
+            onClick={handleOpenModal}
+            className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
+          >
+            Add New Event
+          </CustomButton>
+        </div>
+        <EventFormModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitEvent} />
 
         <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
+          {eventData && (
+        <div className="mt-8">
+          <div className="max-w-md mx-auto">
+            <EventCards event={eventData} />
+          </div>
+        </div>
+      )}
         </div>
       </div>
     </div>

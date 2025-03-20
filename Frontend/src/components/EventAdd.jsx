@@ -14,9 +14,11 @@ import {
   Github,
   Twitter,
 } from "lucide-react"
+import events from "../json/events";
+import { EventButton } from "../components/EventButton";
 
 // Custom Button Component
-const CustomButton = ({ onClick, children, className = "" }) => {
+export function CustomButton  ({ onClick, children, className = "" })  {
   return (
     <button
       onClick={onClick}
@@ -28,7 +30,7 @@ const CustomButton = ({ onClick, children, className = "" }) => {
 }
 
 // Event Card Component (using your structure)
-const EventCard = ({ event }) => {
+export function EventCards ({ event }) {
   const [isHovered, setIsHovered] = useState(false)
 
   const getSocialIcon = (url) => {
@@ -122,19 +124,14 @@ const EventCard = ({ event }) => {
             ))}
           </div>
         )}
-        <button
-          className="w-full py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 flex items-center justify-center"
-          onClick={() => console.log("View details for:", event.name)}
-        >
-          View Details
-        </button>
+        <EventButton event={event}>View Details</EventButton>
       </div>
     </div>
   )
 }
 
 // Event Form Modal Component
-const EventFormModal = ({ isOpen, onClose, onSubmit }) => {
+export function EventFormModal ({ isOpen, onClose, onSubmit }) {
   const [formData, setFormData] = useState({
     id: Date.now(),
     name: "",
@@ -785,7 +782,7 @@ const EventButtonWithForm = () => {
       {eventData && (
         <div className="mt-8">
           <div className="max-w-md mx-auto">
-            <EventCard event={eventData} />
+            <EventCards event={eventData} />
           </div>
         </div>
       )}
