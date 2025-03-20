@@ -97,7 +97,7 @@ const RollingGallery = ({ autoplay = false, pauseOnHover = false, images = [] })
               <img
                 src={url}
                 alt="gallery"
-                className="pointer-events-none h-[200px] w-[500px] rounded-lg border-[3px] border-white object-cover sm:h-[150px] sm:w-[400px]"
+                className="pointer-events-none h-[200px] w-[500px] bg-transparent rounded-lg border-[3px] border-white object-cover sm:h-[150px] sm:w-[400px]"
               />
             </div>
           ))}

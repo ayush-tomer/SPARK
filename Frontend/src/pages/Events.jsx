@@ -14,6 +14,7 @@ import {
 import RollingGallery from "../components/RollingGallery";
 import { EventButton } from "../components/EventButton";
 import events from "../json/events";
+import EventButtonWithForm from "../components/EventAdd";
 
 // Event Card Component
 const EventCard = ({ event }) => {
@@ -141,6 +142,7 @@ export default function Events() {
         </div>
 
         <RollingGallery autoplay={true} pauseOnHover={true} />
+        <EventButtonWithForm />
 
         <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
