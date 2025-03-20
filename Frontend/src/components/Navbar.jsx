@@ -12,7 +12,7 @@ export default function Navbar() {
     { name: "Community", path: "/community" },
     { name: "Events", path: "/events" },
     { name: "Projects", path: "/projects" },
-    { name: "About Us", path: "/AboutUs" },
+    { name: "Internships", path: "/internships" },
     { name: "SignUp", path: "/login" },
   ];
 
@@ -47,7 +47,7 @@ export default function Navbar() {
 
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
           <Link to="/projects" className="text-white hover:text-purple-400 transition-colors">Projects</Link>
-          <Link to="/AboutUs" className="text-white hover:text-purple-400 transition-colors">About Us</Link>
+          <Link to="/internships" className="text-white hover:text-purple-400 transition-colors">Internships</Link>
           <Link to="/login" className="text-white hover:text-purple-400 transition-colors">SignUp</Link>
         </div>
       </div>

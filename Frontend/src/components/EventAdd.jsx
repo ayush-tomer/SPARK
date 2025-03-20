@@ -157,6 +157,7 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
 
   // For image preview
   const [imagePreview, setImagePreview] = useState(null)
+  const [cards, setCards] = useState([]); // State to store multiple cards
 
   if (!isOpen) return null
 
@@ -747,48 +748,4 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
     </div>
   )
 }
-
-// Main Component with Button and Event Display
-const EventButtonWithForm = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [eventData, setEventData] = useState(null)
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
-
-  const handleSubmitEvent = (data) => {
-    setEventData(data)
-    console.log("Event data submitted:", data)
-  }
-
-  return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-center mb-8">
-        <CustomButton
-          onClick={handleOpenModal}
-          className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
-        >
-          Add New Event
-        </CustomButton>
-      </div>
-
-      <EventFormModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitEvent} />
-
-      {eventData && (
-        <div className="mt-8">
-          <div className="max-w-md mx-auto">
-            <EventCards event={eventData} />
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-export default EventButtonWithForm
 
