@@ -6,15 +6,16 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  Calendar,
 } from "lucide-react";
 
 export default function CommunityCard({ event }) {
   const images =
-    event.images && event.images.length > 0 ? event.images : [event.image]; // Ensure it's always an array
+    event.images && event.images.length > 0 ? event.images : [event.image];
   const [currentImage, setCurrentImage] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-
-  // Auto-slide images every 3 seconds if multiple images exist
+  const [activeTab, setActiveTab] = useState("about");
+  const [formData, setFormData] = useState({ name: "", email: "" });
   useEffect(() => {
     if (images.length > 1) {
       const interval = setInterval(() => {
@@ -24,24 +25,35 @@ export default function CommunityCard({ event }) {
     }
   }, [images]);
 
-  // Manual navigation handlers
   const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
   const prevImage = () =>
     setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitted: ${formData.name} - ${formData.email}`);
+  };
   return (
     <>
       {/* Card Component */}
       <motion.div
         className="bg-white dark:bg-gray-800/50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
-        whileHover={{ y: -5 }}
+        whileHover={{ scale: 1.02 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         {/* Image Section */}
         <div className="relative w-full h-56 overflow-hidden">
-          <img
+          <motion.img
+            key={currentImage}
             src={images[currentImage]}
             alt={event.title}
             className="w-full h-full object-cover rounded-t-xl transition-opacity duration-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           />
 
           {images.length > 1 && (
@@ -76,12 +88,38 @@ export default function CommunityCard({ event }) {
 
         {/* Text Content */}
         <div className="p-6">
-          <h2 className="md:text-2xl text-xl font-semibold text-gray-800 dark:text-white mb-2">
+          <motion.h2
+            className="md:text-2xl text-xl font-semibold text-gray-800 dark:text-white mb-2"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             {event.title}
-          </h2>
-          <p className="md:text-xl text-sm text-gray-600 dark:text-gray-300 mb-4">
+          </motion.h2>
+          <motion.p
+            className="md:text-xl text-sm text-gray-600 dark:text-gray-300 mb-4"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             {event.description.slice(0, 80)}...
-          </p>
+          </motion.p>
+
+          {/* Additional Info */}
+          <div className="flex flex-col gap-2 text-sm text-gray-700 dark:text-gray-300">
+            {event.members && (
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                <span>{event.members} members</span>
+              </div>
+            )}
+            {event.activeSince && (
+              <div className="flex items-center gap-2">
+                <Calendar className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                <span>Active since {event.activeSince}</span>
+              </div>
+            )}
+          </div>
 
           <div className="flex justify-between items-center mt-6">
             <button
@@ -98,6 +136,7 @@ export default function CommunityCard({ event }) {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.open(event.link, "_blank")}
             >
               Join Now
             </motion.button>
@@ -115,38 +154,6 @@ export default function CommunityCard({ event }) {
             className="relative w-full max-w-[700px] max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-900/100"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-gray-600"
-              onClick={() => setIsOpen(false)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-4 w-4"
-              >
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-              <span className="sr-only">Close</span>
-            </button>
-
-            {/* Event Title & Description */}
-            <div>
-              <h2 className="text-2xl font-semibold">{event.title}</h2>
-              <p className="text-lg text-gray-500 dark:text-gray-400 mt-1">
-                {event.description}
-              </p>
-            </div>
-
-            {/* Image Gallery in Dialog */}
             {/* Image Carousel in Dialog */}
             <div className="mt-4 relative">
               <h4 className="text-sm font-medium mb-2">Event Images</h4>
@@ -171,55 +178,91 @@ export default function CommunityCard({ event }) {
                   <ChevronRight className="text-white h-5 w-5" />
                 </button>
               </div>
-
-              {/* Indicators */}
-              <div className="flex justify-center space-x-2 mt-2">
-                {images.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                      index === currentImage ? "bg-white w-3" : "bg-gray-500"
-                    }`}
-                  />
-                ))}
-              </div>
             </div>
-
-            {/* Additional Event Details */}
-            <div className="grid gap-4 py-4">
-              {event.location && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {event.location}
-                  </span>
-                </div>
-              )}
-
-              {event.participants && (
-                <div className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {event.participants} participants
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* External Links */}
-            <div className="flex gap-2 mt-4">
-              {event.link && (
-                <a
-                  href={event.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-medium text-white rounded-md hover:bg-blue-700"
+            {/* Tabs Navigation */}
+            <div className="flex space-x-6 border-b pb-2">
+              {["about", "statistics", "apply"].map((tab) => (
+                <button
+                  key={tab}
+                  className={`py-2 px-4 font-medium ${
+                    activeTab === tab
+                      ? "text-blue-600 border-b-2 border-blue-600"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => setActiveTab(tab)}
                 >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Visit Event
-                </a>
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            {/* Content Sections */}
+            <div className="py-4">
+              {activeTab === "about" && (
+                <div>
+                  <h2 className="text-2xl font-semibold">{event.title}</h2>
+                  <p className="text-lg text-gray-500 dark:text-gray-400 mt-1">
+                    {event.description}
+                  </p>
+                </div>
+              )}
+
+              {activeTab === "statistics" && (
+                <div className="text-lg text-gray-500 dark:text-gray-400 space-y-3">
+                  {event.members && (
+                    <div className="flex items-center gap-2">
+                      <Users className="h-5 w-5" />
+                      <span>{event.members} members</span>
+                    </div>
+                  )}
+                  {event.activeSince && (
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-5 w-5" />
+                      <span>Active since {event.activeSince}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activeTab === "apply" && (
+                <form onSubmit={handleSubmit} className="space-y-4 flex flex-col justify-center itece">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-2/3 p-2 border-none rounded-md"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-2/3 p-2 border-none rounded-md"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 w-1/3 text-white rounded-md bg-gradient-to-r from-purple-500 to-pink-500"
+                  >
+                    Apply Now
+                  </button>
+                </form>
               )}
             </div>
+
+            {/* Official Website Button */}
+            <motion.button
+              onClick={() => window.open(event.link, "_blank")}
+              className=" w-1/3 py-2 text-white bg-blue-600/30 rounded-md"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Official Website
+            </motion.button>
           </div>
         </div>
       )}
