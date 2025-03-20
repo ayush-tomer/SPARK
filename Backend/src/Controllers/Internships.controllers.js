@@ -215,7 +215,7 @@ export const UpdateInternship = async (req, res) => {
   }
 };
 
-// Getall internships :
+// Getall internships:
 export const GetInternships = async (req, res) => {
   try {
     const internships = await Internship.find();
@@ -247,13 +247,11 @@ export const GetInternship = async (req, res) => {
         .json({ message: "No Internship Retrieved", error: true });
     }
 
-    res
-      .status(200)
-      .json({
-        message: "Internship Retrieved Successfully",
-        error: false,
-        data: internship,
-      });
+    res.status(200).json({
+      message: "Internship Retrieved Successfully",
+      error: false,
+      data: internship,
+    });
   } catch (error) {
     console.log(error);
     res.status(401).json({ message: "Internal Server issue", error: true });
