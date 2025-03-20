@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
@@ -12,7 +13,7 @@ export default function Navbar() {
     { name: "Community", path: "/community" },
     { name: "Events", path: "/events" },
     { name: "Projects", path: "/projects" },
-    { name: "About Us", path: "/AboutUs" },
+    { name: "Internships", path: "/internships" },
     { name: "SignUp", path: "/login" },
   ];
 
@@ -36,26 +37,62 @@ export default function Navbar() {
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-center items-center space-x-8">
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
-          <Link to="/social" className="text-white hover:text-purple-400 transition-colors">Social</Link>
-          <Link to="/community" className="text-white hover:text-purple-400 transition-colors">Community</Link>
-          <Link to="/events" className="text-white hover:text-purple-400 transition-colors">Events</Link>
+          <Link
+            to="/social"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Social
+          </Link>
+          <Link
+            to="/community"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Community
+          </Link>
+          <Link
+            to="/events"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Events
+          </Link>
         </div>
 
-        <Link to='/' className="w-16 h-16 rounded-full flex items-center justify-center">
+        <Link
+          to="/"
+          className="w-16 h-16 rounded-full flex items-center justify-center"
+        >
           <img src={logo} alt="Logo" className="rounded-full" />
         </Link>
 
         <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
-          <Link to="/projects" className="text-white hover:text-purple-400 transition-colors">Projects</Link>
-          <Link to="/AboutUs" className="text-white hover:text-purple-400 transition-colors">About Us</Link>
-          <Link to="/login" className="text-white hover:text-purple-400 transition-colors">SignUp</Link>
+          <Link
+            to="/projects"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Projects
+          </Link>
+          <Link
+            to="/internships"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            Internships
+          </Link>
+          <Link
+            to="/login"
+            className="text-white hover:text-purple-400 transition-colors"
+          >
+            SignUp
+          </Link>
         </div>
       </div>
 
       {/* Mobile Navbar */}
       <div className="md:hidden">
         <div className="flex justify-center mb-4">
-          <Link to="/" className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center">
+          <Link
+            to="/"
+            className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center"
+          >
             <img src={logo} alt="Logo" className="rounded-full" />
           </Link>
         </div>
@@ -77,7 +114,9 @@ export default function Navbar() {
                 <div
                   key={item.name}
                   className={`transform transition-all duration-100 ${
-                    index <= activeIndex ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+                    index <= activeIndex
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-full opacity-0"
                   }`}
                   style={{
                     transitionDelay: `${index * 0.02}s`,

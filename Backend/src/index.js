@@ -9,6 +9,9 @@ import authRoutes from "./Routes/auth.Route.js";
 import projectsRoutes from "./Routes/projects.Route.js";
 import userRoutes from "./Routes/users.Route.js";
 import eventsRoutes from "./Routes/events.Route.js";
+import communityRoutes from "./Routes/community.route.js";
+import internshipRoutes from "./Routes/Intenships.route.js";
+import problemRoutes from "./Routes/problemStatement.Route.js";
 
 dotenv.config();
 
@@ -28,6 +31,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectsRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/Events", eventsRoutes);
+app.use("/api/community", communityRoutes);
+app.use("/api/internship", internshipRoutes);
+app.use("/api/problemStatement", problemRoutes);
 
 app.listen(PORT || process.env.PORT, () => {
   console.log(`Server is running on PORT : ${PORT}`);
