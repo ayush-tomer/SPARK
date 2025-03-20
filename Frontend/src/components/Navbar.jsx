@@ -2,11 +2,32 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import logo from "../assets/logo.jpg";
+import unknownUser from "/unknownUser.jpg";
+import { app } from "../firebaseConfig";
+
+const auth = getAuth(app);
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
+
+  const handleGuestClick = () => {
+    alert("Please log in to access your profile.");
+  };
 
   const navItems = [
     { name: "Social", path: "/social" },
@@ -14,7 +35,9 @@ export default function Navbar() {
     { name: "Events", path: "/events" },
     { name: "Projects", path: "/projects" },
     { name: "Internships", path: "/internships" },
-    { name: "SignUp", path: "/login" },
+    user
+      ? { name: "Logout", path: "#", action: handleLogout }
+      : { name: "SignIn", path: "/login" },
   ];
 
   useEffect(() => {
@@ -77,13 +100,70 @@ export default function Navbar() {
           >
             Internships
           </Link>
-          <Link
-            to="/login"
-            className="text-white hover:text-purple-400 transition-colors"
-          >
-            SignUp
-          </Link>
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="text-white hover:text-purple-400 transition-colors"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="text-white hover:text-purple-400 transition-colors"
+            >
+              SignIn
+            </Link>
+          )}
         </div>
+      </div>
+
+      {/* Profile Icon - Desktop (Right) */}
+      <div className="hidden md:flex fixed top-7 right-7">
+        {user ? (
+          <Link
+            to="/profile"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
+          >
+            {user.displayName?.charAt(0).toUpperCase() ||
+              user.email?.charAt(0).toUpperCase()}
+          </Link>
+        ) : (
+          <div
+            onClick={handleGuestClick}
+            className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
+          >
+            <img
+              src={unknownUser}
+              alt="Guest"
+              className="w-10 h-10 rounded-full"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Profile Icon - Mobile (Left) */}
+      <div className="md:hidden fixed top-5 left-5">
+        {user ? (
+          <Link
+            to="/profile"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
+          >
+            {user.displayName?.charAt(0).toUpperCase() ||
+              user.email?.charAt(0).toUpperCase()}
+          </Link>
+        ) : (
+          <div
+            onClick={handleGuestClick}
+            className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer"
+          >
+            <img
+              src={unknownUser}
+              alt="Guest"
+              className="w-10 h-10 rounded-full"
+            />
+          </div>
+        )}
       </div>
 
       {/* Mobile Navbar */}
@@ -106,33 +186,6 @@ export default function Navbar() {
         >
           <Menu size={24} />
         </button>
-
-        {isOpen && (
-          <div className="fixed top-0 right-0 h-full w-full bg-black/50 z-40">
-            <div className="absolute top-0 right-0 h-full flex flex-col items-end pt-24 pr-6 space-y-4">
-              {navItems.map((item, index) => (
-                <div
-                  key={item.name}
-                  className={`transform transition-all duration-100 ${
-                    index <= activeIndex
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-full opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: `${index * 0.02}s`,
-                  }}
-                >
-                  <Link
-                    to={item.path}
-                    className="bg-[#1a1d24] text-white px-6 py-2 rounded-full hover:bg-purple-600 transition-colors inline-block"
-                  >
-                    {item.name}
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );

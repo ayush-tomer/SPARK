@@ -73,11 +73,12 @@ export function EventCards ({ event }) {
         <img
           src={event.image || "/placeholder.svg"}
           alt={event.name}
-          className="w-full h-full object-cover transition-transform duration-700"
+          fill
+          className={`object-cover transition-transform duration-700`}
         />
         <div
           className={`absolute top-4 right-4 z-20 px-3 py-1 text-xs font-semibold rounded-full border ${getModeColor(
-            event.mode,
+            event.mode
           )}`}
         >
           {event.mode}
@@ -86,7 +87,9 @@ export function EventCards ({ event }) {
 
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">{event.name}</h3>
+          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">
+            {event.name}
+          </h3>
           <a
             href={event.website}
             target="_blank"
@@ -157,6 +160,7 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
 
   // For image preview
   const [imagePreview, setImagePreview] = useState(null)
+  const [cards, setCards] = useState([]); // State to store multiple cards
 
   if (!isOpen) return null
 
@@ -747,48 +751,4 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
     </div>
   )
 }
-
-// Main Component with Button and Event Display
-const EventButtonWithForm = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [eventData, setEventData] = useState(null)
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
-
-  const handleSubmitEvent = (data) => {
-    setEventData(data)
-    console.log("Event data submitted:", data)
-  }
-
-  return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-center mb-8">
-        <CustomButton
-          onClick={handleOpenModal}
-          className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
-        >
-          Add New Event
-        </CustomButton>
-      </div>
-
-      <EventFormModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitEvent} />
-
-      {eventData && (
-        <div className="mt-8">
-          <div className="max-w-md mx-auto">
-            <EventCards event={eventData} />
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-export default EventButtonWithForm
 
