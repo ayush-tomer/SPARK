@@ -219,8 +219,12 @@ export const EventModal = ({ event, isOpen, onClose }) => {
       }
 
       // Add wheel event listener to the document
-      document.addEventListener("wheel", preventBackgroundScroll, { passive: false })
-      document.addEventListener("touchmove", preventBackgroundScroll, { passive: false })
+      document.addEventListener("wheel", preventBackgroundScroll, {
+        passive: false,
+      })
+      document.addEventListener("touchmove", preventBackgroundScroll, {
+        passive: false,
+      })
 
       return () => {
         document.body.style.overflow = "auto"
@@ -465,7 +469,7 @@ export const EventModal = ({ event, isOpen, onClose }) => {
                     <div className="text-center">
                       <h4 className="font-bold text-lg text-gray-900 dark:text-white">2nd Place</h4>
                       <p className="font-semibold text-xl bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent">
-                        $3,000
+                        {event?.second || "₹25,000"}
                       </p>
                     </div>
                   </div>
@@ -478,7 +482,7 @@ export const EventModal = ({ event, isOpen, onClose }) => {
                     <div className="text-center">
                       <h4 className="font-bold text-xl text-gray-900 dark:text-white">1st Place</h4>
                       <p className="font-semibold text-2xl bg-gradient-to-r from-yellow-600 to-amber-500 bg-clip-text text-transparent">
-                        $5,000
+                        {event?.first || "₹50,000"}
                       </p>
                     </div>
                   </div>
@@ -491,7 +495,7 @@ export const EventModal = ({ event, isOpen, onClose }) => {
                     <div className="text-center">
                       <h4 className="font-bold text-lg text-gray-900 dark:text-white">3rd Place</h4>
                       <p className="font-semibold text-xl bg-gradient-to-r from-amber-700 to-amber-500 bg-clip-text text-transparent">
-                        $1,500
+                        {event?.third || "₹15,000"}
                       </p>
                     </div>
                   </div>
