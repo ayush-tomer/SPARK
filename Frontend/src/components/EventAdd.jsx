@@ -73,11 +73,12 @@ export function EventCards ({ event }) {
         <img
           src={event.image || "/placeholder.svg"}
           alt={event.name}
-          className="w-full h-full object-cover transition-transform duration-700"
+          fill
+          className={`object-cover transition-transform duration-700`}
         />
         <div
           className={`absolute top-4 right-4 z-20 px-3 py-1 text-xs font-semibold rounded-full border ${getModeColor(
-            event.mode,
+            event.mode
           )}`}
         >
           {event.mode}
@@ -86,7 +87,9 @@ export function EventCards ({ event }) {
 
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">{event.name}</h3>
+          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">
+            {event.name}
+          </h3>
           <a
             href={event.website}
             target="_blank"

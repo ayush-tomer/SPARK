@@ -51,17 +51,6 @@ const HeroSection = () => {
           Your browser does not support the video tag.
         </video>
       </div>
-
-      {/* Fixed Logo Button at the Bottom Right */}
-      <div className="fixed bottom-5 right-5">
-        <button onClick={handleLogoClick}>
-          <img
-            src={logo}
-            alt="Logo"
-            className="w-20 h-20 rounded-full shadow-lg cursor-pointer mr-5"
-          />
-        </button>
-      </div>
     </div>
   );
 };
