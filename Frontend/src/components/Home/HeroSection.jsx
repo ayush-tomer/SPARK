@@ -68,7 +68,7 @@ const HeroSection = () => {
   return (
     <motion.div
       ref={containerRef}
-      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex -mt-10 flex-col items-center justify-center relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -190,11 +190,11 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Let's Collaborate, Connect & Grow for{" "}
-            <span className="relative inline-block w-64 h-14 align-bottom">
+            <span className="relative inline-block w-96 h-14 align-bottom">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={activeIndex}
-                  className="absolute inset-0 bg-gradient-to-r from-orange-600 to-violet-700 text-transparent bg-clip-text font-bold"
+                  className="absolute inset-0 mt-5 h-20 bg-gradient-to-r from-orange-600 to-violet-700 text-transparent bg-clip-text font-bold"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
@@ -208,7 +208,7 @@ const HeroSection = () => {
 
           {/* Description with character-by-character animation */}
           <motion.p
-            className="mt-8 text-2xl text-neutral-600 max-w-3xl mx-auto"
+            className="mt-8 text-2xl text-neutral-400 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
