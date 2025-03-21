@@ -19,7 +19,7 @@ export default function Internships() {
         );
         const result = await response.json();
 
-        console.log("Fetched Data:", result); // Debug API response
+        console.log("Fetched Data:", result);
 
         if (result && Array.isArray(result.data)) {
           setData(result.data); // Set data correctly
