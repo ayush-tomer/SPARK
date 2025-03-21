@@ -137,7 +137,7 @@ export default function Login() {
               className="w-full p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50"
             >
               {loading
-                ? "Processing..."
+                ? "Processing.."
                 : isSignUp
                 ? "Create Account"
                 : "Sign In"}
