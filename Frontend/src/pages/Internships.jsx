@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import InternshipCard from '../components/InternshipCard';
-import {motion} from 'framer-motion';
-import GridDistortion from '../components/Distortion';
-import Banner from "../assets/Internships-pictures/Internship.webp"
+import React, { useState } from "react";
+import InternshipCard from "../components/InternshipCard";
+import { motion } from "framer-motion";
+import GridDistortion from "../components/Distortion";
+import Banner from "../assets/Internships-pictures/Internship.webp";
 
 export default function Internships() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('All');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState("All");
 
   const internships = [
     {
@@ -150,19 +150,18 @@ export default function Internships() {
         ]
     }
 ];
+  const categories = ["All", ...new Set(internships.map((i) => i.category))];
 
-const categories = ["All", ...new Set(internships.map((i) => i.category))];
+  // Filter logic
+  const filteredInternships = internships.filter(
+    (internship) =>
+      (filter === "All" || internship.category.includes(filter)) &&
+      (internship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        internship.description.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
-// Filter logic
-const filteredInternships = internships.filter(
-  (internship) =>
-    (filter === "All" || internship.category.includes(filter)) &&
-    (internship.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      internship.description.toLowerCase().includes(searchTerm.toLowerCase()))
-);
-
-return (
-  <div className="container mx-auto p-6">
+  return (
+    <div className="container mx-auto p-6">
       <motion.div
         className="relative w-full h-[70vh] mb-10"
         initial={{ opacity: 0, y: 50 }}
@@ -170,8 +169,6 @@ return (
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        
-
         {/* Grid Distortion Background */}
         <div className="absolute inset-0 z-0">
           <GridDistortion
@@ -185,41 +182,45 @@ return (
         </div>
       </motion.div>
       <div className="min-h-screen p-6">
-    <h1 className="text-8xl font-bold bg-gradient-to-r from-orange-600 to-violet-700 text-center text-transparent bg-clip-text mb-5">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-600 to-violet-700 text-center text-transparent bg-clip-text mb-5">
           Internships
         </h1>
-    <div className="flex justify-center gap-4 mb-6">
-      <input
-        type="text"
-        placeholder="Search internships..."
-        className="border p-2 rounded-md w-64"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <select
-        className="border p-2 rounded-md"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      >
-        {categories.map((cat, index) => (
-          <option key={index} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-    </div>
-    <div className="flex flex-wrap justify-center gap-6">
-      {filteredInternships.length > 0 ? (
-        filteredInternships.map((internship, index) => (
-          <InternshipCard key={index} internship={internship} />
-        ))
-      ) : (
-        <p className="text-center text-gray-500">No internships found.</p>
-      )}
-    </div>
-  </div>
-    </div>
-);
-}
 
-{/*  */}
+        {/* Search and Filter */}
+        <div className="flex flex-col md:flex-row justify-center gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Search internships..."
+            className="border p-2 rounded-md w-full max-w-xs md:max-w-sm"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <select
+            className="border p-2 rounded-md w-full max-w-xs md:max-w-sm"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            {categories.map((cat, index) => (
+              <option key={index} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Internship Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredInternships.length > 0 ? (
+            filteredInternships.map((internship, index) => (
+              <InternshipCard key={index} internship={internship} />
+            ))
+          ) : (
+            <p className="text-center text-gray-500 col-span-full">
+              No internships found.
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
