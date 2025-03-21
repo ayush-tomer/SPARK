@@ -25,7 +25,7 @@ export const createEvent = async (req, res) => {
 // Get All Events :
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await Event.find();
+    const events = await Events.find();
     if (!events) {
       return res.status(401).json({ error: true, message: "No Events found" });
     }
