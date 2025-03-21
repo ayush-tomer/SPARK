@@ -13,7 +13,7 @@ import img9 from "/events/hackvsit.webp";
 const AboutUs = () => {
   return (
     <>
-      <h1 className="md:text-9xl text-5xl md:text-left text-center md:mr-10 bg-gradient-to-r from-orange-600 to-violet-700 text-transparent bg-clip-text font-semibold font-bebas-neue px-5 pt-20 mb-10 animate-fade-in">
+      <h1 className="md:text-9xl text-5xl text-center md:mr-10 bg-gradient-to-r from-orange-600 to-violet-700 text-transparent bg-clip-text font-semibold font-bebas-neue px-5 pt-20 mb-10 animate-fade-in">
         HERE COMES
       </h1>
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-xl sm:text-2xl md:text-3xl font-semibold w-[90%] sm:w-[70%] md:w-[40%] mx-auto rounded-full py-2 text-center">
