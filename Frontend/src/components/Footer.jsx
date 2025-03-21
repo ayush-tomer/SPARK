@@ -20,7 +20,7 @@ const Footer = () => {
             Connect with Us
           </h2>
           <p className="text-lg lg:text-xl text-gray-300">
-            Email: <span className="text-red-400">example@gmail.com</span>
+            <span className="text-red-400">sparknans777@gmail.com</span>
           </p>
         </div>
 
