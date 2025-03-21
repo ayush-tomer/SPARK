@@ -27,8 +27,8 @@ const events = [
 const HomeEvent = () => {
   return (
     <div className="p-8 mt-28">
-      <p className="text-gray-400 ml-10 px-5 text-lg">hackathons, seminars...</p>
-      <h2 className="md:text-9xl text-6xl text-center md:text-left md:ml-10 text-[#ffffff] font-semibold font-bebas-neue px-5 mb-10 animate-fade-in">EVENTS</h2>
+      <p className="text-gray-400 mr-10 px-5 text-right text-lg">hackathons, seminars...</p>
+      <h2 className="md:text-9xl text-6xl text-center md:text-right md:ml-10 bg-gradient-to-r from-orange-600 to-violet-700 text-transparent bg-clip-text font-semibold font-bebas-neue px-5 mb-10 animate-fade-in">EVENTS</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
           <div
