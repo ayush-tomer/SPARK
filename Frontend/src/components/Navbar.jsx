@@ -56,7 +56,7 @@ export default function Navbar() {
     <nav className="p-4 relative">
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-center items-center space-x-8">
-        <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
+        <div className="bg-[#964e66] rounded-full px-8 py-2 flex space-x-8">
           <Link to="/social" className="text-white hover:text-purple-400 transition-colors">Social</Link>
           <Link to="/community" className="text-white hover:text-purple-400 transition-colors">Community</Link>
           <Link to="/events" className="text-white hover:text-purple-400 transition-colors">Events</Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
           <img src={logo} alt="Logo" className="rounded-full" />
         </Link>
 
-        <div className="bg-[#292a2e] rounded-full px-8 py-2 flex space-x-8">
+        <div className="bg-[#964e66] rounded-full px-8 py-2 flex space-x-8">
           <Link to="/projects" className="text-white hover:text-purple-400 transition-colors">Projects</Link>
           <Link to="/internships" className="text-white hover:text-purple-400 transition-colors">Internships</Link>
           {user ? (

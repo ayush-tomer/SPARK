@@ -2,6 +2,7 @@ import Aurora from "./components/Background.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { Outlet } from "react-router-dom";
 import "./index.css"
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <div className="pt-16">
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 }
