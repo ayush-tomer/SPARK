@@ -13,6 +13,15 @@ import Profile from "../pages/Profile.jsx";
 import Internships from "../pages/Internships.jsx";
 import AboutUs from "../pages/AboutUs.jsx";
 
+// Admin Routes:
+import AdminRoute from "./AdminRoutes.jsx";
+import DashboardLayout from "../pages/Admin/Dashboard/DashboardLayout.jsx";
+import AdminLogin from "../pages/Admin/Login/AdminLogin.jsx";
+import Dashboard from "../pages/Admin/Dashboard/Dashboard.jsx";
+import ManageCommunities from "../pages/Admin/Communities/ManageCommunities.jsx";
+import UpdateCommunity from "../pages/Admin/Communities/UpdateCommunity.jsx";
+import AddCommunity from "../pages/Admin/Communities/AddCommunity.jsx";
+
 const router = createBrowserRouter(
   [
     {
@@ -31,6 +40,52 @@ const router = createBrowserRouter(
         { path: "/profile", element: <Profile /> },
         { path: "/internships", element: <Internships /> },
         { path: "/aboutus", element: <AboutUs /> },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AdminLogin />,
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <AdminRoute>
+          <DashboardLayout />
+        </AdminRoute>
+      ),
+      children: [
+        {
+          path: "",
+          element: (
+            <AdminRoute>
+              <Dashboard />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "manage-communities",
+          element: (
+            <AdminRoute>
+              <ManageCommunities />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "edit-communities/:id",
+          element: (
+            <AdminRoute>
+              <UpdateCommunity />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "add-new-community",
+          element: (
+            <AdminRoute>
+              <AddCommunity />
+            </AdminRoute>
+          ),
+        },
       ],
     },
   ],
