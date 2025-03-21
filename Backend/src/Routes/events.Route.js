@@ -1,16 +1,16 @@
 import express from "express";
 import adminAuthenticate from "../Middlewares/admin.middleware.js";
 import {
-  CreateEvent,
+  createEvent,
   UpdateEvent,
   DeleteEvent,
-  GetEvent,
-  GetEvents,
+  getSingleEvent,
+  getAllEvents,
 } from "../Controllers/events.Controllers.js";
 const router = express.Router();
 
 //Create Event :
-router.post("/events-create", adminAuthenticate, CreateEvent);
+router.post("/events-create", adminAuthenticate, createEvent);
 
 //Update Event :
 router.put("/events-update/:id", adminAuthenticate, UpdateEvent);
@@ -19,9 +19,9 @@ router.put("/events-update/:id", adminAuthenticate, UpdateEvent);
 router.delete("/events-delete/:id", adminAuthenticate, DeleteEvent);
 
 //Get Single Event :
-router.get("/events/:id", GetEvent);
+router.get("/events/:id", getSingleEvent);
 
 //Get Events :
-router.get("/events", GetEvents);
+router.get("/events", getAllEvents);
 
 export default router;

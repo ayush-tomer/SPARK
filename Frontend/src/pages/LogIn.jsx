@@ -1,63 +1,62 @@
-"use client"
-
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { signUp, signIn, checkUsernameExists } from "../auth"
-import { useNavigate } from "react-router-dom"
-import { Loader2, Lock, Mail, User, UserCircle } from "lucide-react"
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { signUp, signIn, checkUsernameExists } from "../auth";
+import { useNavigate } from "react-router-dom";
+import { Loader2, Lock, Mail, User, UserCircle } from "lucide-react";
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [fullName, setFullName] = useState("")
-  const [username, setUsername] = useState("")
-  const [isSignUp, setIsSignUp] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleAuth = async () => {
-    if (loading) return
+    if (loading) return;
 
-    setErrorMessage("")
-    setLoading(true)
+    setErrorMessage("");
+    setLoading(true);
 
     try {
       if (isSignUp) {
-        const { success, exists, error } = await checkUsernameExists(username)
+        const { success, exists, error } = await checkUsernameExists(username);
         if (!success) {
-          setErrorMessage(error || "Error checking username")
-          setLoading(false)
-          return
+          setErrorMessage(error || "Error checking username");
+          setLoading(false);
+          return;
         }
         if (exists) {
-          setErrorMessage("Username not available")
-          setLoading(false)
-          return
+          setErrorMessage("Username not available");
+          setLoading(false);
+          return;
         }
 
-        const response = await signUp(email, password, fullName, username)
+        const response = await signUp(email, password, fullName, username);
         if (response.success) {
-          console.log("✅ Signed Up User:", response.user)
-          navigate("/")
+          console.log("✅ Signed Up User:", response.user);
+          navigate("/");
         } else {
-          setErrorMessage(response.error || "An error occurred")
+          setErrorMessage(response.error || "An error occurred");
         }
       } else {
-        const response = await signIn(email, password)
+        const response = await signIn(email, password);
         if (response.success) {
-          console.log("✅ Signed In User:", response.user)
-          navigate("/")
+          console.log("✅ Signed In User:", response.user);
+          navigate("/");
         } else {
-          setErrorMessage(response.error || "An error occurred")
+          setErrorMessage(response.error || "An error occurred");
         }
       }
     } catch (error) {
-      setErrorMessage("Something went wrong. Please try again.")
+      setErrorMessage("Something went wrong. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="relative mt-32 md:mt-20 flex items-center justify-center w-full overflow-hidden text-white">
@@ -137,17 +136,23 @@ export default function Login() {
               disabled={loading}
               className="w-full p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50"
             >
-              {loading ? "Processing..." : isSignUp ? "Create Account" : "Sign In"}
+              {loading
+                ? "Processing.."
+                : isSignUp
+                ? "Create Account"
+                : "Sign In"}
             </button>
             <p
               className="text-center text-gray-400 cursor-pointer mt-4"
               onClick={() => setIsSignUp(!isSignUp)}
             >
-              {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+              {isSignUp
+                ? "Already have an account? Sign In"
+                : "Don't have an account? Sign Up"}
             </p>
           </div>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
