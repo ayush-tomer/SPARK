@@ -111,7 +111,7 @@ const events = [
       {
         question: "What should I bring?",
         answer:
-          "Participants should bring their laptops, chargers, and any other equipment they might need. Food and refreshments will be provided.",
+          "Participants should bring their laptops, chargers, and any other equipment they might need. Food and refreshments will be provided..",
       },
       {
         question: "Is there a registration fee?",
