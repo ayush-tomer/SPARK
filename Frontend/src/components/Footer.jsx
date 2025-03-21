@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col md:flex-row justify-between items-center h-auto md:h-[30vh] rounded-t-[2.5rem] bg-[#442292] text-white md:px-32 px-8 py-12">
+    <footer className="flex flex-col mt-20 md:flex-row justify-between items-center h-auto md:h-[30vh] rounded-t-[2.5rem] bg-[#442292] text-white md:px-32 px-8 py-12">
       {/* Left Side: SPARK */}
       <div className="w-full md:w-[45%] flex items-center justify-center md:justify-start mb-6 md:mb-0">
         <h1 className="text-[4rem] sm:text-[5rem] md:text-[7rem] lg:text-[8rem] 
