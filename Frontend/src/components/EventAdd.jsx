@@ -14,11 +14,10 @@ import {
   Github,
   Twitter,
 } from "lucide-react"
-import events from "../json/events";
-import { EventButton } from "../components/EventButton";
+import { EventButton } from "../components/EventButton"
 
 // Custom Button Component
-export function CustomButton  ({ onClick, children, className = "" })  {
+export function CustomButton({ onClick, children, className = "" }) {
   return (
     <button
       onClick={onClick}
@@ -30,7 +29,7 @@ export function CustomButton  ({ onClick, children, className = "" })  {
 }
 
 // Event Card Component (using your structure)
-export function EventCards ({ event }) {
+export function EventCards({ event }) {
   const [isHovered, setIsHovered] = useState(false)
 
   const getSocialIcon = (url) => {
@@ -78,7 +77,7 @@ export function EventCards ({ event }) {
         />
         <div
           className={`absolute top-4 right-4 z-20 px-3 py-1 text-xs font-semibold rounded-full border ${getModeColor(
-            event.mode
+            event.mode,
           )}`}
         >
           {event.mode}
@@ -87,9 +86,7 @@ export function EventCards ({ event }) {
 
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">
-            {event.name}
-          </h3>
+          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">{event.name}</h3>
           <a
             href={event.website}
             target="_blank"
@@ -111,6 +108,25 @@ export function EventCards ({ event }) {
             <span className="text-sm font-medium">{event.location}</span>
           </div>
         </div>
+        {/* {event.first && (
+          <div className="space-y-3 mt-3">
+            {event.first && (
+              <div className="flex items-center text-gray-600 bg-gray-50 rounded-lg p-2">
+                <span className="text-sm font-medium">🥇 1st Prize: {event.first}</span>
+              </div>
+            )}
+            {event.second && (
+              <div className="flex items-center text-gray-600 bg-gray-50 rounded-lg p-2">
+                <span className="text-sm font-medium">🥈 2nd Prize: {event.second}</span>
+              </div>
+            )}
+            {event.third && (
+              <div className="flex items-center text-gray-600 bg-gray-50 rounded-lg p-2">
+                <span className="text-sm font-medium">🥉 3rd Prize: {event.third}</span>
+              </div>
+            )}
+          </div>
+        )} */}
 
         {event.socialLinks && event.socialLinks.length > 0 && (
           <div className="flex gap-2 mb-6 justify-center">
@@ -134,7 +150,7 @@ export function EventCards ({ event }) {
 }
 
 // Event Form Modal Component
-export function EventFormModal ({ isOpen, onClose, onSubmit }) {
+export function EventFormModal({ isOpen, onClose, onSubmit }) {
   const [formData, setFormData] = useState({
     id: Date.now(),
     name: "",
@@ -143,11 +159,13 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
     location: "",
     mode: "Offline",
     website: "",
-    applyLink: "",
     socialLinks: [""],
     description: "",
     applicationDeadline: "",
     prizePools: [{ track: "", prize: "" }],
+    first: "",
+    second: "",
+    third: "",
     sponsors: [{ name: "", logo: "", tier: "" }],
     schedule: [
       {
@@ -160,7 +178,7 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
 
   // For image preview
   const [imagePreview, setImagePreview] = useState(null)
-  const [cards, setCards] = useState([]); // State to store multiple cards
+  const [cards, setCards] = useState([]) // State to store multiple cards
 
   if (!isOpen) return null
 
@@ -404,17 +422,6 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Apply Link</label>
-                <input
-                  type="url"
-                  name="applyLink"
-                  value={formData.applyLink}
-                  onChange={handleChange}
-                  className="w-full p-2 border rounded-md"
-                  required
-                />
-              </div>
-              <div>
                 <label className="block text-sm font-medium mb-1">Application Deadline</label>
                 <input
                   type="datetime-local"
@@ -488,6 +495,47 @@ export function EventFormModal ({ isOpen, onClose, onSubmit }) {
                 <Plus className="h-4 w-4 mr-1" /> Add Prize Pool
               </button>
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+              <div>
+                <label className="block text-sm font-medium mb-1">1st Prize</label>
+                <input
+                  type="text"
+                  name="first"
+                  value={formData.first}
+                  onChange={handleChange}
+                  className="w-full p-2 border rounded-md"
+                  required
+                  placeholder="₹50,000"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">2nd Prize</label>
+                <input
+                  type="text"
+                  name="second"
+                  value={formData.second}
+                  onChange={handleChange}
+                  className="w-full p-2 border rounded-md"
+                  required
+                  placeholder="₹30,000"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">3rd Prize</label>
+                <input
+                  type="text"
+                  name="third"
+                  value={formData.third}
+                  onChange={handleChange}
+                  className="w-full p-2 border rounded-md"
+                  required
+                  placeholder="₹20,000"
+                />
+              </div>
+            </div>
+
+            <h4 className="text-md font-medium mt-4">Track Prizes</h4>
             {formData.prizePools.map((pool, index) => (
               <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                 <div>

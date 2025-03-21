@@ -59,7 +59,7 @@ export default function Login() {
   };
 
   return (
-    <div className="relative md:-mt-10 flex items-center justify-center w-full overflow-hidden text-white">
+    <div className="relative mt-32 md:mt-20 flex items-center justify-center w-full overflow-hidden text-white">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

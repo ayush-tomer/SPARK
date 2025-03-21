@@ -1,13 +1,15 @@
 import HeroSection from "../components/Home/HeroSection";
-import FeatureSection from "../components/Home/FeatureSection";
 import Workflow from "../components/Home/Workflow";
 import Testimonials from "../components/Home/Testimonials";
+import AboutUs from "../components/Home/AboutUs";
+import HomeEvent from "../components/Home/HomeEvent";
 
 function Home() {
   return (
     <>
       <HeroSection />
-      <FeatureSection />
+      <AboutUs />
+      <HomeEvent />
       <Workflow />
       <Testimonials />
     </>
