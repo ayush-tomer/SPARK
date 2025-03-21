@@ -3,31 +3,131 @@ import mongoose from "mongoose";
 const eventSchema = new mongoose.Schema({
   title: {
     type: String,
-    unique: true,
-    require: true,
+    required: true,
   },
-  data: {
-    type: Date,
-    require: true,
-    get: (date) => date.toISOString().split("T")[0],
-    set: (date) => new Date(date),
-  },
-  Organizer: {
+  banner: {
     type: String,
-    require: true,
+    required: true,
   },
-  description: {
+  Date: {
     type: String,
-    require: true,
+    required: true,
   },
-  category: {
+  Location: {
     type: String,
-    require: true,
+    required: true,
   },
-  Aim: {
+  Mode: {
     type: String,
-    require: true,
+    required: true,
+    enum: ["Offline", "Online", "Hybrid"],
   },
+  Website: {
+    type: String,
+    required: true,
+  },
+  Apply: {
+    type: String,
+    required: true,
+  },
+  Deadline: {
+    type: String,
+    required: true,
+  },
+  Description: {
+    type: String,
+    required: true,
+  },
+  Social: [
+    {
+      question: {
+        type: String,
+        required: true,
+      },
+      answers: {
+        type: String,
+        required: String,
+      },
+    },
+  ],
+  PricePool: [
+    {
+      First: { type: String, requirede: true },
+      Second: { type: String, required: true },
+    },
+  ],
+  TrackPrizes: [
+    {
+      Name: {
+        type: String,
+        required: true,
+      },
+      Prize: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+  Sponsor: [
+    {
+      Name: {
+        type: String,
+        required: true,
+      },
+      Logo: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+      Tier: {
+        type: String,
+        enum: ["Platinum", "Gold", "Silver", "Bronze"],
+      },
+    },
+  ],
+  Schedule: [
+    {
+      Day: [
+        {
+          Event: [
+            {
+              time: {
+                type: String,
+                required: true,
+              },
+            },
+            {
+              eventTitle: {
+                type: String,
+                required: true,
+              },
+            },
+            {
+              description: {
+                type: String,
+                required: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  Faq: [
+    {
+      Questions: {
+        type: String,
+        required: true,
+      },
+      Answers: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Events = mongoose.model("Events", eventSchema);
