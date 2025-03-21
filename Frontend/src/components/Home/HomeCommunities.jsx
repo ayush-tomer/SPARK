@@ -81,9 +81,9 @@ function CommunitiesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <div className="w-20 h-20 rounded-full bg-green-600 flex items-center justify-center mb-2">
-                  <div className="w-16 h-16 rounded-full bg-green-700 flex items-center justify-center text-white">
-                    <span className="text-xl">G</span>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mb-2">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center text-white">
+                    <img src="/home/gdg.webp" className="text-xl rounded-full" />
                   </div>
                 </div>
                 <p className="text-center text-sm mt-2">GDG</p>
@@ -102,15 +102,15 @@ function CommunitiesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <div className="w-20 h-20 flex items-center justify-center mb-2">
-                  <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                <div className="w-20 h-20 flex items-center  justify-center mb-2">
+                  <div className="w-20 h-20 rounded-full flex bg-white items-center justify-center text-white">
                     <img
-                      src="/home/gdg.webp"
+                      src="/home/geekroom.webp"
                       className="text-xl rounded-full"
                     />
                   </div>
                 </div>
-                <p className="text-center text-sm mt-2">STUDENT CHAPTER</p>
+                <p className="text-center text-sm mt-2">Geek Room</p>
                 <button className="mt-4 bg-purple-600 hover:bg-purple-700 text-white py-1 px-4 rounded-full text-sm transition-colors">
                   Join community
                 </button>
