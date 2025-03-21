@@ -54,6 +54,7 @@ const eventSchema = new mongoose.Schema({
     {
       First: { type: String, requirede: true },
       Second: { type: String, required: true },
+      Third: { type: String, required: true },
     },
   ],
   TrackPrizes: [

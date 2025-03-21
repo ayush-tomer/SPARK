@@ -14,6 +14,13 @@ const AddEventModal = () => {
     Schedule: [
       { Day: [{ Event: [{ time: "", eventTitle: "", description: "" }] }] },
     ],
+    PrizePool: [
+      {
+        First: "",
+        Second: "",
+        Third: "",
+      }
+    ],
     TrackPrizes: [{ Name: "", Prize: "" }],
     FAQ: [{ Question: "", Answers: "" }],
     Sponsor: [{ Name: "", Logo: "", url: "", Tier: "Platinum" }],
@@ -258,7 +265,7 @@ const AddEventModal = () => {
                 <h1>PrizePool</h1>
                 <div>
                   <input
-                    type="url"
+                    type="text"
                     name=""
                     placeholder="Ist Prize"
                     className="w-full p-3 border mb-2 rounded bg-gray-800"
@@ -268,10 +275,20 @@ const AddEventModal = () => {
                 </div>
                 <div>
                   <input
-                    type="url"
+                    type="text"
                     name=""
                     placeholder="IInd Prize"
                     className="w-full p-3 border rounded bg-gray-800"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name=""
+                    placeholder="IIIrd Prize"
+                    className="w-full p-3 border mb-2 rounded bg-gray-800"
                     onChange={handleChange}
                     required
                   />
@@ -412,7 +429,7 @@ const AddEventModal = () => {
                       placeholder="Question"
                       value={faq.Question}
                       onChange={(e) =>
-                        handlePrizeChange(index, "Question", e.target.value)
+                        handleFAQChange(index, "Question", e.target.value)
                       }
                       className="w-full p-2 border rounded mt-2"
                       required
