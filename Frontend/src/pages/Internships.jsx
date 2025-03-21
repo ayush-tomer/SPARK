@@ -22,7 +22,7 @@ export default function Internships() {
         console.log("Fetched Data:", result);
 
         if (result && Array.isArray(result.data)) {
-          setData(result.data); // Set data correctly
+          setData(result.data);
         } else {
           console.error("Invalid API response format:", result);
           setData([]);
