@@ -84,7 +84,7 @@ const EventList = () => {
         viewport={{ once: true }}
       >
         {/* Hero Section */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center w-11/12 md:w-2/3 bg-neutral-200/45 p-4 md:p-8 rounded-xl text-center mx-auto z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center w-11/12 h-1/2 self-center md:w-2/3 bg-neutral-200/45 p-4 md:p-8 rounded-xl text-center mx-auto z-10">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-red-700 to-black text-transparent bg-clip-text mb-4">
             Be the Part of SPARK
           </h1>
