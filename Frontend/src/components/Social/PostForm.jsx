@@ -1,11 +1,9 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-import { useRef, useEffect } from "react";
-import { X, ImageIcon, Smile } from "lucide-react";
-import { createPost, updatePost } from "../../utils/posts";
-import { getUserData } from "../../auth";
+import { useRef, useEffect } from "react"
+import { X, ImageIcon, Smile } from "lucide-react"
 
 export default function PostForm({
   isPostModalOpen,
@@ -14,6 +12,8 @@ export default function PostForm({
   setNewPostImage,
   newPostCaption,
   setNewPostCaption,
+  handleCreatePost,
+  handleImageChange,
   editingPost,
   setEditingPost,
   editPostCaption,
@@ -23,151 +23,47 @@ export default function PostForm({
   handleSaveEdit,
   handleEditImageChange,
 }) {
-  const fileInputRef = useRef(null);
-  const editFileInputRef = useRef(null);
-  const emojiPickerRef = useRef(null);
-  const editEmojiPickerRef = useRef(null);
-  const modalRef = useRef(null);
-  const editModalRef = useRef(null);
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file); // set for backend
-      setNewPostImage(URL.createObjectURL(file)); // set for preview
-    }
-  };
-  
+  const fileInputRef = useRef(null)
+  const editFileInputRef = useRef(null)
+  const emojiPickerRef = useRef(null)
+  const editEmojiPickerRef = useRef(null)
+  const modalRef = useRef(null)
+  const editModalRef = useRef(null)
 
   // Sample emojis for the emoji picker
-  const emojis = [
-    "😀",
-    "😂",
-    "😍",
-    "🥰",
-    "😎",
-    "🤩",
-    "😊",
-    "🙌",
-    "👍",
-    "❤️",
-    "🔥",
-    "✨",
-    "🎉",
-    "🌈",
-    "🌟",
-  ];
+  const emojis = ["😀", "😂", "😍", "🥰", "😎", "🤩", "😊", "🙌", "👍", "❤️", "🔥", "✨", "🎉", "🌈", "🌟"]
 
   // State for emoji pickers
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [showEditEmojiPicker, setShowEditEmojiPicker] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = await getUserData(); // current logged-in user
-  
-    let imageUrl = editingPost?.image || ""; // default to existing image
-  
-    // If user selected a new image
-    if (image) {
-      const formData = new FormData();
-      formData.append("file", image);
-      formData.append("upload_preset", "socialPost");
-  
-      const res = await fetch("https://api.cloudinary.com/v1_1/dkg4enwlp/image/upload", {
-        method: "POST",
-        body: formData,
-      });
-  
-      const data = await res.json();
-      imageUrl = data.secure_url;
-    }
-  
-    if (editingPost) {
-      // ✅ UPDATE POST
-      const result = await updatePost(editingPost.id, {
-        caption: content,
-        image: imageUrl,
-      });
-  
-      if (result.success) {
-        alert("Post updated successfully ✅");
-      } else {
-        alert("Error updating post: " + result.error);
-      }
-    } else {
-      // ✅ CREATE POST
-      const result = await createPost({
-        content,
-        imageUrl,
-        user,
-      });
-  
-      if (result.success) {
-        alert("Post created successfully ✅");
-      } else {
-        alert("Error creating post: " + result.error);
-      }
-    }
-  
-    // Clear form and close modal in both cases
-    setContent("");
-    setImage(null);
-    setNewPostCaption("");
-    setNewPostImage("");
-    setEditingPost(null); // 🔥 important for edit
-    setIsPostModalOpen(false);
-  };
-  
-  
-  useEffect(() => {
-    if (editingPost) {
-      setCaption(editingPost.caption || "");
-      setNewPostImage(editingPost.image || null); // image preview
-      setImage(null); // no new file yet
-    } else {
-      setCaption("");
-      setNewPostImage(null);
-      setImage(null);
-    }
-  }, [editingPost]);
-  
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
+  const [showEditEmojiPicker, setShowEditEmojiPicker] = useState(false)
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        emojiPickerRef.current &&
-        !emojiPickerRef.current.contains(event.target)
-      ) {
-        setShowEmojiPicker(false);
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target)) {
+        setShowEmojiPicker(false)
       }
-      if (
-        editEmojiPickerRef.current &&
-        !editEmojiPickerRef.current.contains(event.target)
-      ) {
-        setShowEditEmojiPicker(false);
+      if (editEmojiPickerRef.current && !editEmojiPickerRef.current.contains(event.target)) {
+        setShowEditEmojiPicker(false)
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   // Add emoji to post caption
   const addEmojiToCaption = (emoji) => {
-    setNewPostCaption((prev) => prev + emoji);
-    setShowEmojiPicker(false);
-  };
+    setNewPostCaption((prev) => prev + emoji)
+    setShowEmojiPicker(false)
+  }
 
   // Add emoji to edit post caption
   const addEmojiToEditCaption = (emoji) => {
-    setEditPostCaption((prev) => prev + emoji);
-    setShowEditEmojiPicker(false);
-  };
+    setEditPostCaption((prev) => prev + emoji)
+    setShowEditEmojiPicker(false)
+  }
 
   return (
     <>
@@ -189,11 +85,9 @@ export default function PostForm({
                 Create Post
               </h2>
               <button
-                onClick={handleSubmit}
+                onClick={handleCreatePost}
                 className={`bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-full px-5 sm:px-6 py-1.5 sm:py-2.5 font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-md ${
-                  !newPostCaption.trim() && !newPostImage
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
+                  !newPostCaption.trim() && !newPostImage ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={!newPostCaption.trim() && !newPostImage}
               >
@@ -292,9 +186,7 @@ export default function PostForm({
               <button
                 onClick={handleSaveEdit}
                 className={`bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-full px-5 sm:px-6 py-2 sm:py-3 font-bold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 shadow-md ${
-                  !editPostCaption.trim() && !editPostImage
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
+                  !editPostCaption.trim() && !editPostImage ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={!editPostCaption.trim() && !editPostImage}
               >
@@ -338,9 +230,7 @@ export default function PostForm({
                     />
                     <button
                       className="text-purple-400 rounded-full h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center hover:bg-purple-900/30 transition-colors border border-purple-800/50"
-                      onClick={() =>
-                        setShowEditEmojiPicker(!showEditEmojiPicker)
-                      }
+                      onClick={() => setShowEditEmojiPicker(!showEditEmojiPicker)}
                     >
                       <Smile className="h-5 w-5 sm:h-6 sm:w-6" />
                     </button>
@@ -386,5 +276,5 @@ export default function PostForm({
         </div>
       )}
     </>
-  );
+  )
 }

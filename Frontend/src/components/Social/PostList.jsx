@@ -1,8 +1,10 @@
-import { useState, useRef, useEffect } from "react"
+"use client"
+
+import { useEffect } from "react"
+
+import { useState, useRef } from "react"
 import { Heart, MessageCircle, MoreHorizontal, Share, Edit, Trash2, Sparkles } from "lucide-react"
 import CommentSection from "./CommentSection"
-import { collection, getDocs, query, orderBy,doc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
 
 export default function PostList({
   posts,
@@ -12,6 +14,7 @@ export default function PostList({
   handleLikePost,
   expandedComments,
   setExpandedComments,
+  handleEditPost,
   setIsPostModalOpen,
   commentText,
   setCommentText,
@@ -26,22 +29,6 @@ export default function PostList({
   const [openDropdown, setOpenDropdown] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
-
-  const handleDeletePost = async (postId) => {
-    try {
-      await deleteDoc(doc(db, "posts", postId));
-      setPosts(posts.filter((p) => p.id !== postId)); // Update UI
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
-  const handleEditPost = (post) => {
-    setEditingPost(post); // ye pass hoga PostForm ko
-    setIsPostModalOpen(true); // modal khol do
-  };
-  
-  
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -135,9 +122,9 @@ export default function PostList({
                     <div
                       className="p-2.5 sm:p-3 hover:bg-red-900/30 cursor-pointer font-medium text-red-400 flex items-center gap-2 text-sm"
                       onClick={() => {
-                        handleDeletePost(post.id);
-                        setOpenDropdown(null);
-                      }}                      
+                        setPosts(posts.filter((p) => p.id !== post.id))
+                        setOpenDropdown(null)
+                      }}
                     >
                       <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       Delete post
