@@ -64,7 +64,6 @@ function CommunitiesPage() {
                   <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center text-white text-xs">
                     <div className="text-center">
                       <div className="font-bold">eyantra</div>
-                      <div className="text-[8px]">IIT</div>
                     </div>
                   </div>
                 </div>
@@ -125,7 +124,7 @@ function CommunitiesPage() {
               >
                 <div className="w-20 h-20 rounded-full bg-yellow-500 flex items-center justify-center mb-2">
                   <div className="w-16 h-16 rounded-full bg-yellow-600 flex items-center justify-center text-white">
-                    <span className="text-xl">I</span>
+                    <img src="/home/ieee.png" className="text-xl rounded-full" />
                   </div>
                 </div>
                 <p className="text-center text-sm mt-2">IEEE</p>
