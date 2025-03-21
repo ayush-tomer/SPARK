@@ -1,6 +1,7 @@
-"use client"
-
-import { useState } from "react"
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import {
   X,
   Plus,
@@ -13,8 +14,8 @@ import {
   Instagram,
   Github,
   Twitter,
-} from "lucide-react"
-import { EventButton } from "../components/EventButton"
+} from "lucide-react";
+import { EventButton } from "../components/EventButton";
 
 // Custom Button Component
 export function CustomButton({ onClick, children, className = "" }) {
@@ -25,33 +26,37 @@ export function CustomButton({ onClick, children, className = "" }) {
     >
       {children}
     </button>
-  )
+  );
 }
 
 // Event Card Component (using your structure)
 export function EventCards({ event }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   const getSocialIcon = (url) => {
-    if (url.includes("linkedin")) return <Linkedin className="h-5 w-5 text-[#0A66C2]" strokeWidth={2.5} />
-    if (url.includes("instagram")) return <Instagram className="h-5 w-5 text-[#E1306C]" strokeWidth={2.5} />
-    if (url.includes("github")) return <Github className="h-5 w-5 text-[#181717]" strokeWidth={2.5} />
-    if (url.includes("twitter")) return <Twitter className="h-5 w-5 text-[#1DA1F2]" strokeWidth={2.5} />
-    return <ExternalLink className="h-5 w-5" />
-  }
+    if (url.includes("linkedin"))
+      return <Linkedin className="h-5 w-5 text-[#0A66C2]" strokeWidth={2.5} />;
+    if (url.includes("instagram"))
+      return <Instagram className="h-5 w-5 text-[#E1306C]" strokeWidth={2.5} />;
+    if (url.includes("github"))
+      return <Github className="h-5 w-5 text-[#181717]" strokeWidth={2.5} />;
+    if (url.includes("twitter"))
+      return <Twitter className="h-5 w-5 text-[#1DA1F2]" strokeWidth={2.5} />;
+    return <ExternalLink className="h-5 w-5" />;
+  };
 
   const getModeColor = (mode) => {
     switch (mode) {
       case "Online":
-        return "bg-emerald-50 text-emerald-700 border-emerald-200"
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
       case "Offline":
-        return "bg-purple-50 text-purple-700 border-purple-200"
+        return "bg-purple-50 text-purple-700 border-purple-200";
       case "Hybrid":
-        return "bg-amber-50 text-amber-700 border-amber-200"
+        return "bg-amber-50 text-amber-700 border-amber-200";
       default:
-        return "bg-blue-50 text-blue-700 border-blue-200"
+        return "bg-blue-50 text-blue-700 border-blue-200";
     }
-  }
+  };
 
   return (
     <div
@@ -77,7 +82,7 @@ export function EventCards({ event }) {
         />
         <div
           className={`absolute top-4 right-4 z-20 px-3 py-1 text-xs font-semibold rounded-full border ${getModeColor(
-            event.mode,
+            event.mode
           )}`}
         >
           {event.mode}
@@ -86,7 +91,9 @@ export function EventCards({ event }) {
 
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">{event.name}</h3>
+          <h3 className="text-xl font-bold text-gray-100 line-clamp-1">
+            {event.name}
+          </h3>
           <a
             href={event.website}
             target="_blank"
@@ -146,7 +153,7 @@ export function EventCards({ event }) {
         <EventButton event={event}>View Details</EventButton>
       </div>
     </div>
-  )
+  );
 }
 
 // Event Form Modal Component
@@ -174,166 +181,172 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
       },
     ],
     faqs: [{ question: "", answer: "" }],
-  })
+  });
 
   // For image preview
-  const [imagePreview, setImagePreview] = useState(null)
-  const [cards, setCards] = useState([]) // State to store multiple cards
+  const [imagePreview, setImagePreview] = useState(null);
+  const [cards, setCards] = useState([]); // State to store multiple cards
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
       // Create a URL for the image preview
-      const previewUrl = URL.createObjectURL(file)
-      setImagePreview(previewUrl)
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
 
       // Store the file in formData
       setFormData((prev) => ({
         ...prev,
         image: previewUrl, // Store the preview URL for now
-      }))
+      }));
     }
-  }
+  };
 
   const handleSocialLinkChange = (index, value) => {
-    const newSocialLinks = [...formData.socialLinks]
-    newSocialLinks[index] = value
-    setFormData((prev) => ({ ...prev, socialLinks: newSocialLinks }))
-  }
+    const newSocialLinks = [...formData.socialLinks];
+    newSocialLinks[index] = value;
+    setFormData((prev) => ({ ...prev, socialLinks: newSocialLinks }));
+  };
 
   const addSocialLink = () => {
     setFormData((prev) => ({
       ...prev,
       socialLinks: [...prev.socialLinks, ""],
-    }))
-  }
+    }));
+  };
 
   const removeSocialLink = (index) => {
-    const newSocialLinks = [...formData.socialLinks]
-    newSocialLinks.splice(index, 1)
-    setFormData((prev) => ({ ...prev, socialLinks: newSocialLinks }))
-  }
+    const newSocialLinks = [...formData.socialLinks];
+    newSocialLinks.splice(index, 1);
+    setFormData((prev) => ({ ...prev, socialLinks: newSocialLinks }));
+  };
 
   const handlePrizePoolChange = (index, field, value) => {
-    const newPrizePools = [...formData.prizePools]
-    newPrizePools[index] = { ...newPrizePools[index], [field]: value }
-    setFormData((prev) => ({ ...prev, prizePools: newPrizePools }))
-  }
+    const newPrizePools = [...formData.prizePools];
+    newPrizePools[index] = { ...newPrizePools[index], [field]: value };
+    setFormData((prev) => ({ ...prev, prizePools: newPrizePools }));
+  };
 
   const addPrizePool = () => {
     setFormData((prev) => ({
       ...prev,
       prizePools: [...prev.prizePools, { track: "", prize: "" }],
-    }))
-  }
+    }));
+  };
 
   const removePrizePool = (index) => {
-    const newPrizePools = [...formData.prizePools]
-    newPrizePools.splice(index, 1)
-    setFormData((prev) => ({ ...prev, prizePools: newPrizePools }))
-  }
+    const newPrizePools = [...formData.prizePools];
+    newPrizePools.splice(index, 1);
+    setFormData((prev) => ({ ...prev, prizePools: newPrizePools }));
+  };
 
   const handleSponsorChange = (index, field, value) => {
-    const newSponsors = [...formData.sponsors]
-    newSponsors[index] = { ...newSponsors[index], [field]: value }
-    setFormData((prev) => ({ ...prev, sponsors: newSponsors }))
-  }
+    const newSponsors = [...formData.sponsors];
+    newSponsors[index] = { ...newSponsors[index], [field]: value };
+    setFormData((prev) => ({ ...prev, sponsors: newSponsors }));
+  };
 
   const addSponsor = () => {
     setFormData((prev) => ({
       ...prev,
       sponsors: [...prev.sponsors, { name: "", logo: "", tier: "" }],
-    }))
-  }
+    }));
+  };
 
   const removeSponsor = (index) => {
-    const newSponsors = [...formData.sponsors]
-    newSponsors.splice(index, 1)
-    setFormData((prev) => ({ ...prev, sponsors: newSponsors }))
-  }
+    const newSponsors = [...formData.sponsors];
+    newSponsors.splice(index, 1);
+    setFormData((prev) => ({ ...prev, sponsors: newSponsors }));
+  };
 
   const handleScheduleDayChange = (index, value) => {
-    const newSchedule = [...formData.schedule]
-    newSchedule[index] = { ...newSchedule[index], day: value }
-    setFormData((prev) => ({ ...prev, schedule: newSchedule }))
-  }
+    const newSchedule = [...formData.schedule];
+    newSchedule[index] = { ...newSchedule[index], day: value };
+    setFormData((prev) => ({ ...prev, schedule: newSchedule }));
+  };
 
   const handleScheduleEventChange = (dayIndex, eventIndex, field, value) => {
-    const newSchedule = [...formData.schedule]
+    const newSchedule = [...formData.schedule];
     newSchedule[dayIndex].events[eventIndex] = {
       ...newSchedule[dayIndex].events[eventIndex],
       [field]: value,
-    }
-    setFormData((prev) => ({ ...prev, schedule: newSchedule }))
-  }
+    };
+    setFormData((prev) => ({ ...prev, schedule: newSchedule }));
+  };
 
   const addScheduleDay = () => {
     setFormData((prev) => ({
       ...prev,
-      schedule: [...prev.schedule, { day: "", events: [{ time: "", title: "", description: "" }] }],
-    }))
-  }
+      schedule: [
+        ...prev.schedule,
+        { day: "", events: [{ time: "", title: "", description: "" }] },
+      ],
+    }));
+  };
 
   const removeScheduleDay = (index) => {
-    const newSchedule = [...formData.schedule]
-    newSchedule.splice(index, 1)
-    setFormData((prev) => ({ ...prev, schedule: newSchedule }))
-  }
+    const newSchedule = [...formData.schedule];
+    newSchedule.splice(index, 1);
+    setFormData((prev) => ({ ...prev, schedule: newSchedule }));
+  };
 
   const addScheduleEvent = (dayIndex) => {
-    const newSchedule = [...formData.schedule]
+    const newSchedule = [...formData.schedule];
     newSchedule[dayIndex].events.push({
       time: "",
       title: "",
       description: "",
-    })
-    setFormData((prev) => ({ ...prev, schedule: newSchedule }))
-  }
+    });
+    setFormData((prev) => ({ ...prev, schedule: newSchedule }));
+  };
 
   const removeScheduleEvent = (dayIndex, eventIndex) => {
-    const newSchedule = [...formData.schedule]
-    newSchedule[dayIndex].events.splice(eventIndex, 1)
-    setFormData((prev) => ({ ...prev, schedule: newSchedule }))
-  }
+    const newSchedule = [...formData.schedule];
+    newSchedule[dayIndex].events.splice(eventIndex, 1);
+    setFormData((prev) => ({ ...prev, schedule: newSchedule }));
+  };
 
   const handleFAQChange = (index, field, value) => {
-    const newFAQs = [...formData.faqs]
-    newFAQs[index] = { ...newFAQs[index], [field]: value }
-    setFormData((prev) => ({ ...prev, faqs: newFAQs }))
-  }
+    const newFAQs = [...formData.faqs];
+    newFAQs[index] = { ...newFAQs[index], [field]: value };
+    setFormData((prev) => ({ ...prev, faqs: newFAQs }));
+  };
 
   const addFAQ = () => {
     setFormData((prev) => ({
       ...prev,
       faqs: [...prev.faqs, { question: "", answer: "" }],
-    }))
-  }
+    }));
+  };
 
   const removeFAQ = (index) => {
-    const newFAQs = [...formData.faqs]
-    newFAQs.splice(index, 1)
-    setFormData((prev) => ({ ...prev, faqs: newFAQs }))
-  }
+    const newFAQs = [...formData.faqs];
+    newFAQs.splice(index, 1);
+    setFormData((prev) => ({ ...prev, faqs: newFAQs }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(formData)
-    onClose()
-  }
+    e.preventDefault();
+    onSubmit(formData);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-[#232323] rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 bg-[#232323] p-4 border-b flex justify-between items-center z-10">
           <h2 className="text-xl font-bold">Add New Event</h2>
-          <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100">
+          <button
+            onClick={onClose}
+            className="p-1 rounded-full hover:bg-gray-100"
+          >
             <X className="h-6 w-6" />
           </button>
         </div>
@@ -344,7 +357,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
             <h3 className="text-lg font-semibold">Basic Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Event Name</label>
+                <label className="block text-sm font-medium mb-1">
+                  Event Name
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -355,7 +370,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Event Image</label>
+                <label className="block text-sm font-medium mb-1">
+                  Event Image
+                </label>
                 <input
                   type="file"
                   accept="image/*"
@@ -386,7 +403,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Location</label>
+                <label className="block text-sm font-medium mb-1">
+                  Location
+                </label>
                 <input
                   type="text"
                   name="location"
@@ -411,7 +430,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Website</label>
+                <label className="block text-sm font-medium mb-1">
+                  Website
+                </label>
                 <input
                   type="url"
                   name="website"
@@ -422,7 +443,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Application Deadline</label>
+                <label className="block text-sm font-medium mb-1">
+                  Application Deadline
+                </label>
                 <input
                   type="datetime-local"
                   name="applicationDeadline"
@@ -437,7 +460,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
 
           {/* Description */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium mb-1">Description</label>
+            <label className="block text-sm font-medium mb-1">
+              Description
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -465,7 +490,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 <input
                   type="url"
                   value={link}
-                  onChange={(e) => handleSocialLinkChange(index, e.target.value)}
+                  onChange={(e) =>
+                    handleSocialLinkChange(index, e.target.value)
+                  }
                   className="flex-1 p-2 border rounded-md"
                   placeholder="https://..."
                   required
@@ -498,7 +525,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
               <div>
-                <label className="block text-sm font-medium mb-1">1st Prize</label>
+                <label className="block text-sm font-medium mb-1">
+                  1st Prize
+                </label>
                 <input
                   type="text"
                   name="first"
@@ -510,7 +539,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">2nd Prize</label>
+                <label className="block text-sm font-medium mb-1">
+                  2nd Prize
+                </label>
                 <input
                   type="text"
                   name="second"
@@ -522,7 +553,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">3rd Prize</label>
+                <label className="block text-sm font-medium mb-1">
+                  3rd Prize
+                </label>
                 <input
                   type="text"
                   name="third"
@@ -537,23 +570,34 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
 
             <h4 className="text-md font-medium mt-4">Track Prizes</h4>
             {formData.prizePools.map((pool, index) => (
-              <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <div
+                key={index}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center"
+              >
                 <div>
-                  <label className="block text-sm font-medium mb-1">Track</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Track
+                  </label>
                   <input
                     type="text"
                     value={pool.track}
-                    onChange={(e) => handlePrizePoolChange(index, "track", e.target.value)}
+                    onChange={(e) =>
+                      handlePrizePoolChange(index, "track", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Prize</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Prize
+                  </label>
                   <input
                     type="text"
                     value={pool.prize}
-                    onChange={(e) => handlePrizePoolChange(index, "prize", e.target.value)}
+                    onChange={(e) =>
+                      handlePrizePoolChange(index, "prize", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     required
                     placeholder="₹50,000"
@@ -587,23 +631,32 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
               </button>
             </div>
             {formData.sponsors.map((sponsor, index) => (
-              <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+              <div
+                key={index}
+                className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center"
+              >
                 <div>
                   <label className="block text-sm font-medium mb-1">Name</label>
                   <input
                     type="text"
                     value={sponsor.name}
-                    onChange={(e) => handleSponsorChange(index, "name", e.target.value)}
+                    onChange={(e) =>
+                      handleSponsorChange(index, "name", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Logo URL</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Logo URL
+                  </label>
                   <input
                     type="text"
                     value={sponsor.logo}
-                    onChange={(e) => handleSponsorChange(index, "logo", e.target.value)}
+                    onChange={(e) =>
+                      handleSponsorChange(index, "logo", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     required
                   />
@@ -612,7 +665,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                   <label className="block text-sm font-medium mb-1">Tier</label>
                   <select
                     value={sponsor.tier}
-                    onChange={(e) => handleSponsorChange(index, "tier", e.target.value)}
+                    onChange={(e) =>
+                      handleSponsorChange(index, "tier", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     required
                   >
@@ -654,11 +709,15 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
               <div key={dayIndex} className="border p-4 rounded-md space-y-4">
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <label className="block text-sm font-medium mb-1">Day</label>
+                    <label className="block text-sm font-medium mb-1">
+                      Day
+                    </label>
                     <input
                       type="text"
                       value={day.day}
-                      onChange={(e) => handleScheduleDayChange(dayIndex, e.target.value)}
+                      onChange={(e) =>
+                        handleScheduleDayChange(dayIndex, e.target.value)
+                      }
                       className="w-full p-2 border rounded-md"
                       required
                       placeholder="Day 1 (March 21)"
@@ -688,36 +747,64 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                   </div>
 
                   {day.events.map((event, eventIndex) => (
-                    <div key={eventIndex} className="grid grid-cols-1 md:grid-cols-3 gap-2 items-start border-t pt-2">
+                    <div
+                      key={eventIndex}
+                      className="grid grid-cols-1 md:grid-cols-3 gap-2 items-start border-t pt-2"
+                    >
                       <div>
-                        <label className="block text-xs font-medium mb-1">Time</label>
+                        <label className="block text-xs font-medium mb-1">
+                          Time
+                        </label>
                         <input
                           type="text"
                           value={event.time}
-                          onChange={(e) => handleScheduleEventChange(dayIndex, eventIndex, "time", e.target.value)}
+                          onChange={(e) =>
+                            handleScheduleEventChange(
+                              dayIndex,
+                              eventIndex,
+                              "time",
+                              e.target.value
+                            )
+                          }
                           className="w-full p-2 border rounded-md text-sm"
                           required
                           placeholder="09:00 AM"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium mb-1">Title</label>
+                        <label className="block text-xs font-medium mb-1">
+                          Title
+                        </label>
                         <input
                           type="text"
                           value={event.title}
-                          onChange={(e) => handleScheduleEventChange(dayIndex, eventIndex, "title", e.target.value)}
+                          onChange={(e) =>
+                            handleScheduleEventChange(
+                              dayIndex,
+                              eventIndex,
+                              "title",
+                              e.target.value
+                            )
+                          }
                           className="w-full p-2 border rounded-md text-sm"
                           required
                         />
                       </div>
                       <div className="flex gap-2">
                         <div className="flex-1">
-                          <label className="block text-xs font-medium mb-1">Description</label>
+                          <label className="block text-xs font-medium mb-1">
+                            Description
+                          </label>
                           <input
                             type="text"
                             value={event.description}
                             onChange={(e) =>
-                              handleScheduleEventChange(dayIndex, eventIndex, "description", e.target.value)
+                              handleScheduleEventChange(
+                                dayIndex,
+                                eventIndex,
+                                "description",
+                                e.target.value
+                              )
                             }
                             className="w-full p-2 border rounded-md text-sm"
                             required
@@ -726,7 +813,9 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                         {day.events.length > 1 && (
                           <button
                             type="button"
-                            onClick={() => removeScheduleEvent(dayIndex, eventIndex)}
+                            onClick={() =>
+                              removeScheduleEvent(dayIndex, eventIndex)
+                            }
                             className="p-2 text-red-500 hover:text-red-700 self-end"
                           >
                             <Trash className="h-3 w-3" />
@@ -744,7 +833,11 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">FAQs</h3>
-              <button type="button" onClick={addFAQ} className="flex items-center text-blue-600 hover:text-blue-800">
+              <button
+                type="button"
+                onClick={addFAQ}
+                className="flex items-center text-blue-600 hover:text-blue-800"
+              >
                 <Plus className="h-4 w-4 mr-1" /> Add FAQ
               </button>
             </div>
@@ -752,11 +845,15 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
               <div key={index} className="grid grid-cols-1 gap-2">
                 <div className="flex gap-2">
                   <div className="flex-1">
-                    <label className="block text-sm font-medium mb-1">Question</label>
+                    <label className="block text-sm font-medium mb-1">
+                      Question
+                    </label>
                     <input
                       type="text"
                       value={faq.question}
-                      onChange={(e) => handleFAQChange(index, "question", e.target.value)}
+                      onChange={(e) =>
+                        handleFAQChange(index, "question", e.target.value)
+                      }
                       className="w-full p-2 border rounded-md"
                       required
                     />
@@ -772,10 +869,14 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Answer</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Answer
+                  </label>
                   <textarea
                     value={faq.answer}
-                    onChange={(e) => handleFAQChange(index, "answer", e.target.value)}
+                    onChange={(e) =>
+                      handleFAQChange(index, "answer", e.target.value)
+                    }
                     className="w-full p-2 border rounded-md"
                     rows={2}
                     required
@@ -797,6 +898,5 @@ export function EventFormModal({ isOpen, onClose, onSubmit }) {
         </form>
       </div>
     </div>
-  )
+  );
 }
-

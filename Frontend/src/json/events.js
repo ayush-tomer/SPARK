@@ -15,9 +15,9 @@ const events = [
     description:
       "Code-ए-Manipal is a premier coding competition that brings together the brightest minds to solve complex algorithmic challenges. Join us for an exciting 24-hour hackathon experience!",
     applicationDeadline: "2025-03-15T23:59:59",
-      first: "₹50,000",
-      second: "₹25,000",
-      third: "₹15,000",
+    first: "₹50,000",
+    second: "₹25,000",
+    third: "₹15,000",
     prizePools: [
       { track: "Main Track", prize: "₹50,000" },
       { track: "Innovation Track", prize: "₹25,000" },
@@ -109,9 +109,9 @@ const events = [
           "Students from any college or university can participate. Both individuals and teams of up to 4 members are welcome.",
       },
       {
-        question: "What should I bring?",
+        question: "What should I bring??",
         answer:
-          "Participants should bring their laptops, chargers, and any other equipment they might need. Food and refreshments will be provided.",
+          "Participants should bring their laptops, chargers, and any other equipment they might need. Food and refreshments will be provided..",
       },
       {
         question: "Is there a registration fee?",

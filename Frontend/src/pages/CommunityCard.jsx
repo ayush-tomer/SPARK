@@ -226,7 +226,10 @@ export default function CommunityCard({ event }) {
               )}
 
               {activeTab === "apply" && (
-                <form onSubmit={handleSubmit} className="space-y-4 flex flex-col justify-center itece">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-4 flex flex-col justify-center itece"
+                >
                   <input
                     type="text"
                     name="name"
