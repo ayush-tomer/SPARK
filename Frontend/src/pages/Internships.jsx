@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import InternshipCard from "../components/InternshipCard";
 import { motion } from "framer-motion";
 import GridDistortion from "../components/Distortion";
@@ -10,146 +10,156 @@ export default function Internships() {
 
   const internships = [
     {
-        title: "Software Engineering Internship",
-        description: "Gain hands-on experience in full-stack development, working with modern technologies and real-world applications.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / San Francisco",
-        duration: "6 months (Fall 2024)",
-        category: "Software Engineering",
-        requirements: [
-            "Proficiency in JavaScript, React, and Node.js",
-            "Experience with databases like MongoDB or PostgreSQL",
-            "Understanding of REST APIs and microservices",
-            "Strong problem-solving skills"
-        ]
+      title: "Software Engineering Internship",
+      description:
+        "Gain hands-on experience in full-stack development, working with modern technologies and real-world applications.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / San Francisco",
+      duration: "6 months (Fall 2024)",
+      category: "Software Engineering",
+      requirements: [
+        "Proficiency in JavaScript, React, and Node.js",
+        "Experience with databases like MongoDB or PostgreSQL",
+        "Understanding of REST APIs and microservices",
+        "Strong problem-solving skills",
+      ],
     },
     {
-        title: "Graphic Design Internship",
-        description: "Work on creative design projects, including branding, UI/UX, and marketing materials for digital and print media.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Los Angeles",
-        duration: "3 months (Summer 2024)",
-        category: "Design",
-        requirements: [
-            "Proficiency in Adobe Photoshop, Illustrator, and Figma",
-            "Strong understanding of typography and color theory",
-            "Experience in UI/UX design is a plus",
-            "Ability to create engaging and aesthetically pleasing designs"
-        ]
+      title: "Graphic Design Internship",
+      description:
+        "Work on creative design projects, including branding, UI/UX, and marketing materials for digital and print media.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Los Angeles",
+      duration: "3 months (Summer 2024)",
+      category: "Design",
+      requirements: [
+        "Proficiency in Adobe Photoshop, Illustrator, and Figma",
+        "Strong understanding of typography and color theory",
+        "Experience in UI/UX design is a plus",
+        "Ability to create engaging and aesthetically pleasing designs",
+      ],
     },
     {
-        title: "Data Science Internship",
-        description: "Learn and apply data science techniques, including data analysis, machine learning, and predictive modeling.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Chicago",
-        duration: "4 months (Spring 2024)",
-        category: "Data Science",
-        requirements: [
-            "Knowledge of Python, R, or SQL",
-            "Understanding of machine learning algorithms",
-            "Experience with data visualization tools like Tableau or Matplotlib",
-            "Ability to interpret and analyze complex datasets"
-        ]
+      title: "Data Science Internship",
+      description:
+        "Learn and apply data science techniques, including data analysis, machine learning, and predictive modeling.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Chicago",
+      duration: "4 months (Spring 2024)",
+      category: "Data Science",
+      requirements: [
+        "Knowledge of Python, R, or SQL",
+        "Understanding of machine learning algorithms",
+        "Experience with data visualization tools like Tableau or Matplotlib",
+        "Ability to interpret and analyze complex datasets",
+      ],
     },
     {
-        title: "Content Writing Internship",
-        description: "Join our editorial team to create engaging blog posts, articles, and website content for various industries.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Boston",
-        duration: "3 months (Winter 2024)",
-        category: "Content Writing",
-        requirements: [
-            "Excellent writing and grammar skills",
-            "Ability to conduct thorough research on various topics",
-            "Familiarity with SEO best practices",
-            "Experience with content management systems like WordPress is a plus"
-        ]
+      title: "Content Writing Internship",
+      description:
+        "Join our editorial team to create engaging blog posts, articles, and website content for various industries.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Boston",
+      duration: "3 months (Winter 2024)",
+      category: "Content Writing",
+      requirements: [
+        "Excellent writing and grammar skills",
+        "Ability to conduct thorough research on various topics",
+        "Familiarity with SEO best practices",
+        "Experience with content management systems like WordPress is a plus",
+      ],
     },
     {
-        title: "Cybersecurity Internship",
-        description: "Learn and implement security best practices to protect systems and networks from cyber threats.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Washington D.C.",
-        duration: "6 months (Fall 2024)",
-        category: "Cybersecurity",
-        requirements: [
-            "Basic understanding of cybersecurity principles",
-            "Familiarity with penetration testing and ethical hacking tools",
-            "Knowledge of network security and cryptography",
-            "Experience with Linux and scripting languages is a plus"
-        ]
+      title: "Cybersecurity Internship",
+      description:
+        "Learn and implement security best practices to protect systems and networks from cyber threats.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Washington D.C.",
+      duration: "6 months (Fall 2024)",
+      category: "Cybersecurity",
+      requirements: [
+        "Basic understanding of cybersecurity principles",
+        "Familiarity with penetration testing and ethical hacking tools",
+        "Knowledge of network security and cryptography",
+        "Experience with Linux and scripting languages is a plus",
+      ],
     },
     {
-        title: "Marketing Internship",
-        description: "Assist in digital marketing campaigns, social media management, and content strategy to boost brand visibility.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / New York",
-        duration: "4 months (Summer 2024)",
-        category: "Marketing",
-        requirements: [
-            "Familiarity with social media platforms and trends",
-            "Basic understanding of SEO and Google Analytics",
-            "Excellent communication and analytical skills",
-            "Ability to create engaging content for different marketing channels"
-        ]
+      title: "Marketing Internship",
+      description:
+        "Assist in digital marketing campaigns, social media management, and content strategy to boost brand visibility.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / New York",
+      duration: "4 months (Summer 2024)",
+      category: "Marketing",
+      requirements: [
+        "Familiarity with social media platforms and trends",
+        "Basic understanding of SEO and Google Analytics",
+        "Excellent communication and analytical skills",
+        "Ability to create engaging content for different marketing channels",
+      ],
     },
     {
-        title: "Business Development Internship",
-        description: "Work on market research, client outreach, and partnership development to drive business growth.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Austin",
-        duration: "5 months (Spring 2024)",
-        category: "Business Development",
-        requirements: [
-            "Strong interpersonal and negotiation skills",
-            "Ability to analyze market trends and competitors",
-            "Experience with CRM software is a plus",
-            "Entrepreneurial mindset and problem-solving abilities"
-        ]
+      title: "Business Development Internship",
+      description:
+        "Work on market research, client outreach, and partnership development to drive business growth.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Austin",
+      duration: "5 months (Spring 2024)",
+      category: "Business Development",
+      requirements: [
+        "Strong interpersonal and negotiation skills",
+        "Ability to analyze market trends and competitors",
+        "Experience with CRM software is a plus",
+        "Entrepreneurial mindset and problem-solving abilities",
+      ],
     },
     {
-        title: "HR & Recruitment Internship",
-        description: "Assist in talent acquisition, employee engagement, and HR operations to support organizational growth.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Seattle",
-        duration: "3 months (Winter 2024)",
-        category: "Human Resources",
-        requirements: [
-            "Strong communication and organizational skills",
-            "Familiarity with recruitment tools and HR software",
-            "Understanding of employee engagement strategies",
-            "Ability to handle confidential information professionally"
-        ]
+      title: "HR & Recruitment Internship",
+      description:
+        "Assist in talent acquisition, employee engagement, and HR operations to support organizational growth.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Seattle",
+      duration: "3 months (Winter 2024)",
+      category: "Human Resources",
+      requirements: [
+        "Strong communication and organizational skills",
+        "Familiarity with recruitment tools and HR software",
+        "Understanding of employee engagement strategies",
+        "Ability to handle confidential information professionally",
+      ],
     },
     {
-        title: "Finance Internship",
-        description: "Gain practical experience in financial analysis, investment research, and corporate finance.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Miami",
-        duration: "6 months (Spring 2024)",
-        category: "Finance",
-        requirements: [
-            "Basic knowledge of financial statements and accounting principles",
-            "Proficiency in Excel and financial modeling",
-            "Understanding of investment strategies and risk assessment",
-            "Strong analytical and problem-solving skills"
-        ]
+      title: "Finance Internship",
+      description:
+        "Gain practical experience in financial analysis, investment research, and corporate finance.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Miami",
+      duration: "6 months (Spring 2024)",
+      category: "Finance",
+      requirements: [
+        "Basic knowledge of financial statements and accounting principles",
+        "Proficiency in Excel and financial modeling",
+        "Understanding of investment strategies and risk assessment",
+        "Strong analytical and problem-solving skills",
+      ],
     },
     {
-        title: "Product Management Internship",
-        description: "Work on product roadmaps, customer feedback analysis, and feature development strategies.",
-        image: "/placeholder.svg?height=300&width=500",
-        location: "Remote / Silicon Valley",
-        duration: "4 months (Summer 2024)",
-        category: "Product Management",
-        requirements: [
-            "Strong analytical and problem-solving skills",
-            "Familiarity with Agile and Scrum methodologies",
-            "Experience with project management tools like Jira or Trello",
-            "Ability to collaborate with cross-functional teams"
-        ]
-    }
-];
+      title: "Product Management Internship",
+      description:
+        "Work on product roadmaps, customer feedback analysis, and feature development strategies.",
+      image: "/placeholder.svg?height=300&width=500",
+      location: "Remote / Silicon Valley",
+      duration: "4 months (Summer 2024)",
+      category: "Product Management",
+      requirements: [
+        "Strong analytical and problem-solving skills",
+        "Familiarity with Agile and Scrum methodologies",
+        "Experience with project management tools like Jira or Trello",
+        "Ability to collaborate with cross-functional teams",
+      ],
+    },
+  ];
   const categories = ["All", ...new Set(internships.map((i) => i.category))];
 
   // Filter logic
