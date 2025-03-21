@@ -1,10 +1,11 @@
 import Aurora from "./components/Background.jsx";
 import Navbar from "./components/Navbar.jsx";
 import { Outlet } from "react-router-dom";
+import "./index.css"
 
 function App() {
   return (
-    <div className="relative  w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       {/* Aurora Background */}
       <div className="fixed inset-0 -z-10 scale-y-[-1]">
         <Aurora
