@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ChevronDown, ChevronUp, User } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 
-//Main Project
+//Main Projects
 export default function ProjectCard({ project }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef(null);
