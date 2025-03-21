@@ -10,6 +10,7 @@ export const CreateProject = async (req, res) => {
     GitHub,
     ProblemStatement,
     category,
+    image,
   } = req.body;
   try {
     if (
@@ -19,7 +20,8 @@ export const CreateProject = async (req, res) => {
       !TechStack ||
       !GitHub ||
       !ProblemStatement ||
-      !category
+      !category ||
+      !image
     ) {
       return res
         .status(400)
@@ -34,6 +36,7 @@ export const CreateProject = async (req, res) => {
       GitHub,
       ProblemStatement,
       category,
+      image,
     });
 
     await project.save();
@@ -60,6 +63,7 @@ export const UpdateProject = async (req, res) => {
     GitHub,
     ProblemStatement,
     category,
+    image,
   } = req.body;
   try {
     if (
@@ -69,7 +73,8 @@ export const UpdateProject = async (req, res) => {
       !TechStack &&
       !GitHub &&
       !ProblemStatement &&
-      !category
+      !category &&
+      !image
     ) {
       return res
         .status(400)
@@ -108,6 +113,9 @@ export const UpdateProject = async (req, res) => {
     }
     if (category) {
       project.category = category;
+    }
+    if (image) {
+      project.image = image;
     }
 
     await project.save();
