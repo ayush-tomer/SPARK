@@ -7,18 +7,18 @@ import {
   GetProjects,
 } from "../Controllers/projects.Controllers.js";
 
-import adminAuthenticate from "../Middlewares/admin.middleware.js";
+import adminAuthenticateToken from "../Middlewares/admin.middleware.js";
 
 const router = express.Router();
 
 //Create Project :
-router.post("/create-project", CreateProject);
+router.post("/create-project", adminAuthenticateToken, CreateProject);
 
 //Update Product :
-router.put("/update-project/:id", adminAuthenticate, UpdateProject);
+router.put("/update-project/:id", adminAuthenticateToken, UpdateProject);
 
 //Delete Project :
-router.delete("/delete-project/:id", adminAuthenticate, DeleteProject);
+router.delete("/delete-project/:id", adminAuthenticateToken, DeleteProject);
 
 //Get-All Project :
 router.get("/getAll-project", GetProjects);

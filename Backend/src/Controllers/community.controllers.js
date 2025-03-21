@@ -178,7 +178,7 @@ export const DeleteCommunity = async (req, res) => {
         .json({ message: "No Community Found", error: true });
     }
 
-    await community.findByIdAndDelete({ _id: id });
+    await community.deleteOne({ _id: id });
     res.status(200).json({ message: "Deleted Successfully", error: true });
   } catch (error) {
     console.log(error);
