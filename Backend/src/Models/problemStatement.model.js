@@ -33,7 +33,7 @@ const problemStatementSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  communitionSkills: {
+  communicationSkills: {
     type: String,
     required: true,
   },

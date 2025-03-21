@@ -170,19 +170,23 @@ export default function Events() {
             Add New Event
           </CustomButton>
         </div>
-        <EventFormModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitEvent} />
+        <EventFormModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onSubmit={handleSubmitEvent}
+        />
 
         <div className="grid grid-cols-1 mt-20 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
           {eventData && (
-        <div className="mt-8">
-          <div className="max-w-md mx-auto">
-            <EventCards event={eventData} />
-          </div>
-        </div>
-      )}
+            <div className="mt-8">
+              <div className="max-w-md mx-auto">
+                <EventCards event={eventData} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

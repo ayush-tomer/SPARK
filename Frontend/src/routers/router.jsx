@@ -7,7 +7,7 @@ import Social from "../pages/Social.jsx";
 import Projects from "../pages/Projects.jsx";
 import Events from "../pages/Events.jsx";
 import Communities from "../pages/Communities.jsx";
-import Courses from "../pages/Courses.jsx";
+import ProblemStatements from "../pages/ProblemStatement.jsx";
 import Store from "../pages/Store.jsx";
 import Profile from "../pages/Profile.jsx";
 import Internships from "../pages/Internships.jsx";
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         { path: "/events", element: <Events /> },
         { path: "/community", element: <Communities /> },
         { path: "/projects", element: <Projects /> },
-        { path: "/courses", element: <Courses /> },
+        { path: "/problemStatement", element: <ProblemStatements /> },
         { path: "/store", element: <Store /> },
         { path: "/profile", element: <Profile /> },
         { path: "/internships", element: <Internships /> },
