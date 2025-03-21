@@ -3,24 +3,24 @@ import React from "react";
 const events = [
   {
     id: 1,
-    name: "Hackarcode",
+    name: "Code-ए-Manipal",
     theme: "AI/ML",
     description: "Looking for roles in software and design department",
-    image: "/events/hackvsit.webp",
+    image: "/events/manipal.jpg",
   },
   {
     id: 2,
-    name: "Hackarcode",
+    name: "HackVSIT",
     theme: "AI/ML",
     description: "Looking for roles in software and design department",
     image: "/events/hackvsit.webp",
   },
   {
     id: 3,
-    name: "Hackarcode",
+    name: "Hackaccino",
     theme: "AI/ML",
     description: "Looking for roles in software and design department",
-    image: "/events/hackvsit.webp",
+    image: "/events/hackaccino.jpg",
   },
 ];
 
@@ -28,7 +28,7 @@ const HomeEvent = () => {
   return (
     <div className="p-8 mt-28">
       <p className="text-gray-400 ml-10 px-5 text-lg">hackathons, seminars...</p>
-      <h2 className="text-9xl text-left ml-10 text-[#ffffff] font-semibold font-bebas-neue px-5 mb-10 animate-fade-in">EVENTS</h2>
+      <h2 className="md:text-9xl text-6xl text-center md:text-left md:ml-10 text-[#ffffff] font-semibold font-bebas-neue px-5 mb-10 animate-fade-in">EVENTS</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
           <div
