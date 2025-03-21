@@ -1,9 +1,9 @@
-import CommunitiesList from "./CommunityList";
+import CommunityList from "./CommunityList";
 
 const Communities = () => {
   return (
     <div>
-      <CommunitiesList/>
+      <CommunityList/>
     </div>
   );
 };

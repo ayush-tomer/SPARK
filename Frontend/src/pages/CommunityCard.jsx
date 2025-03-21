@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Calendar,
 } from "lucide-react";
+import axios from "axios";
 
 export default function CommunityCard({ event }) {
   const images =
