@@ -12,6 +12,7 @@ import eventsRoutes from "./Routes/events.Route.js";
 import communityRoutes from "./Routes/community.route.js";
 import internshipRoutes from "./Routes/Intenships.route.js";
 import problemRoutes from "./Routes/problemStatement.Route.js";
+import adminRoutes from "./Routes/admin.Route.js";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use("/api/Events", eventsRoutes);
 app.use("/api/community", communityRoutes);
 app.use("/api/internship", internshipRoutes);
 app.use("/api/problemStatement", problemRoutes);
+app.use("/api/Admin", adminRoutes);
 
 app.listen(PORT || process.env.PORT, () => {
   console.log(`Server is running on PORT : ${PORT}`);
