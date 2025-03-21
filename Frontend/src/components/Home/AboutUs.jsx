@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img1 from "/events/hackvsit.webp";
+import img1 from "/events/nakshatra.webp";
 import img2 from "/events/hackvsit.webp";
-import img3 from "/events/hackvsit.webp";
-import img4 from "/events/hackvsit.webp";
+import img3 from "/events/hackaccino.jpg";
+import img4 from "../../assets/Community-Pictures/project-1.jpg";
 import img5 from "/events/hackvsit.webp";
-import img6 from "/events/hackvsit.webp";
-import img7 from "/events/hackvsit.webp";
-import img8 from "/events/hackvsit.webp";
-import img9 from "/events/hackvsit.webp";
+import img6 from "/events/manipal.jpg";
+import img7 from "/Spark.svg";
+import img8 from "../../assets/Community-Pictures/project-2.jpg";
+import img9 from "../../assets/Community-Pictures/project-4.jpg";
 
 const AboutUs = () => {
   return (
@@ -53,11 +53,11 @@ const AboutUs = () => {
         </div>
 
         <div className="grid grid-cols-9 grid-rows-5 md:w-[55%] h-full gap-3">
-          <div className="bg-slate-400 col-span-3 row-span-3 rounded-2xl overflow-hidden hover:cursor-pointer">
+          <div className="bg-white col-span-3 row-span-3 rounded-2xl overflow-hidden hover:cursor-pointer">
             <img
-              src={img5}
+              src={img8}
               alt="Logo"
-              className="w-full h-full object-cover rounded-2xl hover:scale-[1.15] transition-transform duration-500 ease-in-out"
+              className="w-full h-full object-contain rounded-2xl hover:scale-[1.15] transition-transform duration-500 ease-in-out"
             />
           </div>
           <div className="bg-slate-400 col-span-6 row-span-3 rounded-2xl overflow-hidden hover:cursor-pointer">
@@ -76,16 +76,16 @@ const AboutUs = () => {
           </div>
           <div className="bg-slate-400 col-span-5 row-span-2 rounded-2xl overflow-hidden hover:cursor-pointer">
             <img
-              src={img8}
+              src="https://wallpaperaccess.com/full/1614824.jpg"
               alt="Logo"
               className="w-full h-full object-cover rounded-2xl hover:scale-[1.15] transition-transform duration-500 ease-in-out"
             />
           </div>
-          <div className="bg-slate-900 col-span-2 row-span-2 rounded-2xl overflow-hidden hover:cursor-pointer">
+          <div className="bg-white col-span-2 row-span-2 rounded-2xl overflow-hidden hover:cursor-pointer">
             <img
               src={img9}
               alt="Logo"
-              className="w-full h-full object-cover rounded-2xl hover:scale-[1.15] transition-transform duration-500 ease-in-out"
+              className="w-full h-full object-contain rounded-2xl hover:scale-[1.15] transition-transform duration-500 ease-in-out"
             />
           </div>
         </div>
