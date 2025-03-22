@@ -2,7 +2,7 @@
 import { useState } from "react";
 import InputField from "./InputField.jsx";
 import { useForm } from "react-hook-form";
-import { useAddCommunityMutation } from "../../../redux/features/Community/CommunityApi.js";
+import { useAddCommunityMutation } from "../../../redux/features/community/communityApi.js";
 import Swal from "sweetalert2";
 
 const AddCommunity = () => {

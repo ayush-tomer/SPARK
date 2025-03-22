@@ -25,6 +25,7 @@ export default function PostList({
   handleEditComment,
   handleSaveCommentEdit,
   handleDeleteComment,
+  handleDeletePost,
 }) {
   const [openDropdown, setOpenDropdown] = useState(null)
   const [expanded, setExpanded] = useState(false)
@@ -121,10 +122,7 @@ export default function PostList({
                     </div>
                     <div
                       className="p-2.5 sm:p-3 hover:bg-red-900/30 cursor-pointer font-medium text-red-400 flex items-center gap-2 text-sm"
-                      onClick={() => {
-                        setPosts(posts.filter((p) => p.id !== post.id))
-                        setOpenDropdown(null)
-                      }}
+                      onClick={()=>handleDeletePost(post.id)}
                     >
                       <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       Delete post

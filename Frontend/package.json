@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.6.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.8.4",
+    "chart.js": "^4.4.8",
     "firebase": "^11.4.0",
     "framer-motion": "^12.5.0",
     "lucide-react": "^0.460.0",
