@@ -5,6 +5,8 @@ import { getUserData } from "../../auth"
 import { Sparkles } from "lucide-react"
 import PostForm from "./PostForm"
 import PostList from "./PostList"
+import { collection, doc, getDocs, orderBy, query, serverTimestamp, setDoc, updateDoc } from "firebase/firestore"
+import { auth, db } from "../../firebaseConfig"
 
 export default function Post() {
   // Replace the initial posts state with an empty array
@@ -34,7 +36,42 @@ export default function Post() {
   const [expanded, setExpanded] = useState(false)
   const [user, setUser] = useState(null)
 
+  const fetchAllPosts = async () => {
+    try {
+      // Create a query against the posts collection, ordered by timestamp
+      const postsRef = collection(db, "posts");
+      const allPostsQuery = query(
+        postsRef,
+        orderBy("timestamp", "desc") // Most recent posts first
+      );
+
+      // Execute the query
+      const querySnapshot = await getDocs(allPostsQuery);
+
+      // Transform the query results into an array of post objects
+      const allPosts = [];
+      querySnapshot.forEach((doc) => {
+        // Get the data for each post
+        const post = doc.data();
+
+        // Convert Firebase Timestamp to JavaScript Date for display
+        if (post.timestamp) {
+          post.timestamp = post.timestamp.toDate();
+        }
+
+        allPosts.push(post);
+      });
+
+      // Update state with the fetched posts
+      setPosts(allPosts);
+      console.log("Fetched", allPosts.length, "posts");
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
   useEffect(() => {
+    fetchAllPosts();
     getUserData()
       .then((userData) => setUser(userData))
       .catch((err) => console.error(err))
@@ -111,27 +148,55 @@ export default function Post() {
     }
   }
 
-  const handleCreatePost = () => {
+  const handleCreatePost = async () => {
     // Allow post creation if either caption or image is present
     if (newPostCaption.trim() !== "" || newPostImage !== "") {
-      const newPost = {
-        id: Date.now().toString(),
-        // username: "currentuser",
-        // name: "Current User",
-        profilePic: "/placeholder.svg?height=40&width=40",
-        image: newPostImage || "",
-        caption: newPostCaption,
-        likes: 0,
-        liked: false,
-        comments: [],
-        timestamp: new Date(),
+      try {
+        const postId = Date.now().toString();
+
+        // Create the post object
+        const newPost = {
+          id: postId,
+          profilePic: "/placeholder.svg?height=40&width=40",
+          image: newPostImage || "",
+          caption: newPostCaption,
+          likes: 0,
+          liked: false,
+          comments: [],
+          timestamp: serverTimestamp(), // Using server timestamp
+        };
+
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          newPost.userId = currentUser.uid;
+          newPost.username = currentUser.displayName || "User";
+          newPost.userProfilePic = currentUser.photoURL || "/placeholder.svg?height=40&width=40";
+        }
+
+        // Save to Firebase
+        await setDoc(doc(db, "posts", postId), newPost);
+
+        // For local state, we need an actual date for immediate display
+        const localPost = {
+          ...newPost,
+          timestamp: new Date(),
+        };
+
+        // Update local state
+        setPosts([localPost, ...posts]);
+
+        // Reset form
+        setNewPostImage("");
+        setNewPostCaption("");
+        setIsPostModalOpen(false);
+
+        console.log("Post created successfully!");
+      } catch (error) {
+        console.error("Error creating post:", error);
+        // You might want to show an error message to the user here
       }
-      setPosts([newPost, ...posts])
-      setNewPostImage("")
-      setNewPostCaption("")
-      setIsPostModalOpen(false)
     }
-  }
+  };
 
   const handleLikePost = (postId) => {
     setPosts(
@@ -235,26 +300,62 @@ export default function Post() {
     setEditPostImage(post.image)
   }
 
-  // Add a function to save edited post
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
+    // Proceed if either caption or image has content
     if (editPostCaption.trim() !== "" || editPostImage !== "") {
-      setPosts(
-        posts.map((post) => {
-          if (post.id === editingPost.id) {
-            return {
-              ...post,
-              caption: editPostCaption,
-              image: editPostImage,
+      try {
+        // Check if user is logged in
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          console.log("No user logged in");
+          return;
+        }
+  
+        // Get ownership ID from the post (either direct userId or in user object)
+        const postOwnerId = editingPost.userId || (editingPost.user && editingPost.user.uid);
+        
+        // Verify ownership
+        if (postOwnerId !== currentUser.uid) {
+          console.error("You can only edit your own posts");
+          return;
+        }
+  
+        // Update data object with modified fields
+        const updatedData = {
+          caption: editPostCaption,
+          image: editPostImage,
+          lastEdited: new Date() // Optional: add timestamp for when it was edited
+        };
+  
+        // Update in Firestore
+        await updateDoc(doc(db, "posts", editingPost.id), updatedData);
+        
+        // Update local state
+        setPosts(
+          posts.map((post) => {
+            if (post.id === editingPost.id) {
+              return {
+                ...post,
+                ...updatedData
+              };
             }
-          }
-          return post
-        }),
-      )
-      setEditingPost(null)
-      setEditPostCaption("")
-      setEditPostImage("")
+            return post;
+          })
+        );
+        
+        // Reset editing state
+        setEditingPost(null);
+        setEditPostCaption("");
+        setEditPostImage("");
+  
+        console.log("Post updated successfully");
+      } catch (error) {
+        console.error("Error updating post:", error);
+        // Optional: Show error message to user
+        // alert("Failed to update post: " + error.message);
+      }
     }
-  }
+  };
 
   // Add emoji to post caption
   const addEmojiToCaption = (emoji) => {
@@ -345,6 +446,7 @@ export default function Post() {
         handleEditComment={handleEditComment}
         handleSaveCommentEdit={handleSaveCommentEdit}
         handleDeleteComment={handleDeleteComment}
+        
       />
 
       <style jsx global>{`
