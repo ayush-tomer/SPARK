@@ -5,7 +5,7 @@ import LogIn from "../pages/LogIn.jsx";
 import SignUp from "../pages/SignUp.jsx";
 import Social from "../pages/Social.jsx";
 import Projects from "../pages/Projects.jsx";
-import Events from "../pages/Events.jsx";
+import Events from "../pages/Eventsnew.jsx";
 import Communities from "../pages/Communities.jsx";
 import ProblemStatements from "../pages/ProblemStatement.jsx";
 import Store from "../pages/Store.jsx";
