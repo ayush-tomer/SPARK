@@ -1,4 +1,4 @@
-// src/components/RevenueChart.jsx
+// src/components/DataChart.jsx
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -20,30 +20,21 @@ ChartJS.register(
   Legend
 );
 
-const RevenueChart = () => {
-  const revenueData = [
-    500, 700, 800, 600, 750, 900, 650, 870, 960, 1020, 1100, 1150,
-  ];
+const DataChart = () => {
+  const categoryData = {
+    Communities: 6,
+    Events: 20,
+    Projects: 7,
+    ProblemStatements: 5,
+    Internships: 6,
+  };
 
   const data = {
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
+    labels: Object.keys(categoryData),
     datasets: [
       {
-        label: "Revenue (USD)",
-        data: revenueData,
+        label: "Count",
+        data: Object.values(categoryData),
         backgroundColor: "rgba(34, 197, 94, 0.7)",
         borderColor: "rgba(34, 197, 94, 1)",
         borderWidth: 1,
@@ -59,7 +50,7 @@ const RevenueChart = () => {
       },
       title: {
         display: true,
-        text: "Monthly Revenue",
+        text: "Data Overview",
       },
     },
     scales: {
@@ -71,14 +62,12 @@ const RevenueChart = () => {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-4 bg-white shadow-lg rounded-lg">
-      <h2 className="text-center text-2xl font-bold text-gray-800 mb-4">
-        Monthly Revenue
-      </h2>
+      <h2 className="text-center text-2xl font-bold text-gray-800 mb-4"></h2>
       <div className="hidden md:block">
-        <Bar data={data} options={options} className="" />
+        <Bar data={data} options={options} />
       </div>
     </div>
   );
 };
 
-export default RevenueChart;
+export default DataChart;

@@ -124,7 +124,7 @@ const Dashboard = () => {
       <section className="grid md:grid-cols-2 xl:grid-cols-4 xl:grid-rows-3 xl:grid-flow-col gap-4">
         <div className="flex flex-col md:col-span-2 md:row-span-2 bg-white shadow rounded-lg">
           <div className="px-5 py-6 font-semibold border-b border-gray-100 text-center text-2xl">
-            Site Visitors
+            Statistics
           </div>
           <div className="p-4">
             <div className="flex items-center justify-center px-4 py-6 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">
@@ -236,9 +236,24 @@ const Dashboard = () => {
                 Manage Projects
               </Link>
             </div>
+            <div className="flex flex-col md:mt-14 bg-white md:h-[310px] items-center justify-center px-6 py- font-semibold border-b border-gray-100 w-full">
+              <span className="text-2xl md:mb-14">Problem Statements</span>
+              <div className="flex flex-col w-full gap-4">
+                <Link
+                  to="/dashboard/add-new-problemStatements"
+                  className="w-full px-4 py-3 bg-purple-500 text-white font-bold rounded-md shadow-md hover:bg-purple-600 transition duration-300 text-center"
+                >
+                  Add Statements
+                </Link>
+                <Link
+                  to="/dashboard/manage-problemStatements"
+                  className="w-full px-4 py-3 bg-purple-500 text-white font-bold rounded-md shadow-md hover:bg-purple-600 transition duration-300 text-center"
+                >
+                  Manage Statements
+                </Link>
+              </div>
+            </div>
           </div>
-
-          {/* Content */}
         </div>
       </section>
     </>
