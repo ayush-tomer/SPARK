@@ -7,16 +7,18 @@ import {
   GetStatement,
 } from "../Controllers/ProblemStatement.Controllers.js";
 
+import adminAuthenticateToken from "../Middlewares/admin.middleware.js";
+
 const router = express.Router();
 
 //Create Statement :
-router.post("/create-Statement", CreateStatement);
+router.post("/create-Statement", adminAuthenticateToken, CreateStatement);
 
 //Update Statement :
-router.put("/update-Statement/:id", UpdateStatement);
+router.put("/update-Statement/:id", adminAuthenticateToken, UpdateStatement);
 
 //Delete Statement :
-router.delete("/delete-Statement/:id", DeleteStatement);
+router.delete("/delete-Statement/:id", adminAuthenticateToken, DeleteStatement);
 
 //Get-All Statement :
 router.get("/getAll-Statement", GetStatements);

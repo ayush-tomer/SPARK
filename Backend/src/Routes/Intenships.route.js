@@ -7,16 +7,21 @@ import {
   GetInternship,
 } from "../Controllers/Internships.controllers.js";
 
+import adminAuthenticateToken from "../Middlewares/admin.middleware.js";
 const router = express.Router();
 
 //Create Project :
-router.post("/create-internship", CreateInternship);
+router.post("/create-internship", adminAuthenticateToken, CreateInternship);
 
 //Update Product :
-router.put("/update-internship/:id", UpdateInternship);
+router.put("/update-internship/:id", adminAuthenticateToken, UpdateInternship);
 
 //Delete Project :
-router.delete("/delete-internship/:id", DeleteInternship);
+router.delete(
+  "/delete-internship/:id",
+  adminAuthenticateToken,
+  DeleteInternship
+);
 
 //Get-All Project :
 router.get("/getAll-internship", GetInternships);
