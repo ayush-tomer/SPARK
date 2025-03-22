@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import getBaseUrl from "../../../utilis/baseUrl.js";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
+import { Lock } from "lucide-react";
 
 const AdminLogin = () => {
   const [message, setMessage] = useState("");
@@ -13,7 +15,6 @@ const AdminLogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -33,74 +34,90 @@ const AdminLogin = () => {
         localStorage.setItem("token", auth.accessToken);
         setTimeout(() => {
           localStorage.removeItem("token");
-          alert("Token has been expired");
+          alert("Token has expired");
           navigate("/");
         }, 3600 * 1000);
       }
       Swal.fire({
-        title: "Admin Login SuccessFull",
+        title: "Admin Login Successful",
         text: "Admin Token generated!",
         icon: "success",
-        showCancelButton: true,
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
         confirmButtonText: "Welcome",
       });
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      setMessage("Please Provide a valid email and Password");
+      setMessage("Please provide a valid username and password");
     }
   };
 
   return (
-    <div className="h-screen flex justify-center items-center font-Montesarrat">
-      <div className="w-full max-w-sm mx-auto bg-purple-700/85 shadow-xl rounded px-8 pt-6 pb-8 mb-4 border">
-        <h2 className="text-4xl text-center mt-2 py-4 font-semibold mb-8">
-          Admin Login
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-8">
-            <label
-              className="block text-black text-md font-bold mb-2 "
-              htmlFor="userName"
+    <div className="relative mt-32 md:mt-20 flex items-center justify-center w-full overflow-hidden text-white">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="relative z-10 w-full max-w-md mx-auto p-1"
+      >
+        <div className="relative backdrop-blur-xl bg-gray-900/40 border border-gray-800/50 rounded-2xl shadow-lg overflow-hidden p-8 md:p-10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-center mb-8"
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 100 }}
+              className="inline-block mb-4 p-3 rounded-full bg-indigo-600/20 backdrop-blur-md"
             >
-              userName :
-            </label>
+              <Lock className="w-8 h-8 text-indigo-400" />
+            </motion.div>
+            <h2 className="text-3xl font-bold text-indigo-400">Admin Login</h2>
+          </motion.div>
+
+          {message && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400"
+            >
+              {message}
+            </motion.div>
+          )}
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <input
               type="text"
-              placeholder="userName"
+              placeholder="Username"
               name="userName"
               id="userName"
-              className="shadow appearance-none bg-neutral-100 rounded w-full py-2 px-3 leading-tight text-purple-900 focus:outline-none focus:shadow border"
+              className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               {...register("userName", { required: true })}
             />
-          </div>
-          <div className="mb-8">
-            <label
-              className="block text-black text-md font-bold mb-2 "
-              htmlFor="password"
-            >
-              Password :
-            </label>
+
             <input
               type="password"
               placeholder="Password"
               name="password"
               id="password"
-              className="shadow appearance-none bg-neutral-100 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow border text-purple-900 "
+              className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               {...register("Password", { required: true })}
             />
-          </div>
-          <div className="flex justify-center">
-            <button className="bg-primary px-5 py-2 w-full text-xl rounded-md font-semibold border md:mt-2 sm:mt-3 hover:bg-blue-600 hover:text-white delay-150  ease-in-out">
+
+            <button
+              type="submit"
+              className="w-full p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg disabled:opacity-50"
+            >
               Login
             </button>
-
-            {message && <p className="text-red-500 text-sm">{message}</p>}
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      </motion.div>
     </div>
   );
 };

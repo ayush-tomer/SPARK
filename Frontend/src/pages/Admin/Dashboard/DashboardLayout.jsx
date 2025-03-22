@@ -105,7 +105,7 @@ const DashboardLayout = () => {
               to="/dashboard/manage-communities"
               className="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg"
             >
-              <span className="sr-only">Documents</span>
+              <span className="sr-only">Communities</span>
               <MdOutlineManageHistory className="h-6 w-6" />
             </Link>
           </nav>
@@ -230,8 +230,8 @@ const DashboardLayout = () => {
         <main className="p-6 sm:p-10 space-y-6 ">
           <div className="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
             <div className="mr-6">
-              <h1 className="text-4xl font-semibold mb-2">Admin Dashboard</h1>
-              <h2 className="text-gray-600 ml-0.5">Book Store Inventory</h2>
+              <h1 className="text-4xl font-semibold mb-2">Admin </h1>
+              <h2 className="text-gray-600 ml-0.5">Spark Dashboard</h2>
             </div>
             <div className="flex flex-col md:flex-row items-start justify-end -mb-3">
               <Link
@@ -252,10 +252,10 @@ const DashboardLayout = () => {
                     d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                   />
                 </svg>
-                Manage Books
+                Communities
               </Link>
               <Link
-                to="/dashboard/add-new-book"
+                to="/dashboard/add-new-community"
                 className="inline-flex px-5 py-3 text-white bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 rounded-md ml-6 mb-3"
               >
                 <svg
@@ -272,7 +272,7 @@ const DashboardLayout = () => {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                Add New Book
+                Add New Community
               </Link>
             </div>
           </div>
