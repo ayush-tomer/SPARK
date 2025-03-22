@@ -2,6 +2,17 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RollingGallery from "../components/RollingGallery";
 import AddEventModal from "../components/CreateEvents";
+import {
+  ArrowUpRight,
+  Calendar,
+  MapPin,
+  Monitor,
+  ExternalLink,
+  Linkedin,
+  Instagram,
+  Github,
+  Twitter,
+} from "lucide-react";
 
 const EventDialog = ({ event, onClose }) => {
   const [activeTab, setActiveTab] = useState("Overview");
@@ -30,7 +41,8 @@ const EventDialog = ({ event, onClose }) => {
 
           {/* Event Title */}
           <h2 className="text-2xl font-bold mt-2">{event.title}</h2>
-          <p className="text-gray-400">{event.Date} • {event.Location} • {event.Mode}</p>
+          <p className="text-gray-400">{event.Date} | {event.Location}</p>
+          <p className="text-gray-400">  {event.Mode}</p>
 
           {/* Website & Apply */}
           <div className="flex gap-4 mt-2">
@@ -67,9 +79,9 @@ const EventDialog = ({ event, onClose }) => {
                   <li key={index} className="mt-2">
                     {day.Day.map((eventDetail, i) => (
                       <div key={i} className="mb-2">
-                        <p className="font-bold">{eventDetail.Event[1].eventTitle}</p>
+                        <p className="font-bold">{eventDetail.Event[0].eventTitle}</p>
                         <p>{eventDetail.Event[0].time}</p>
-                        <p>{eventDetail.Event[2].description}</p>
+                        <p>{eventDetail.Event[0].description}</p>
                       </div>
                     ))}
                   </li>
@@ -119,14 +131,72 @@ const EventCard = ({ event }) => {
   return (
     <>
       <motion.div
-        className="bg-gray-900 text-white p-4 rounded-xl shadow-lg cursor-pointer"
-        whileHover={{ scale: 1.05 }}
+        className="group relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer max-w-md mx-auto"
+        whileHover={{ y: -5 }}
+        transition={{ type: "spring", stiffness: 300 }}
         onClick={() => setIsDialogOpen(true)}
       >
-        <img src={event.banner} alt={event.title} className="w-full h-40 object-cover rounded-lg" />
-        <h2 className="text-xl font-bold mt-2">{event.title}</h2>
-        <p className="text-gray-400">{event.Date} - {event.Location}</p>
-        <p className="text-gray-400">Mode: {event.Mode}</p>
+        {/* Glass effect card */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 backdrop-blur-sm z-10 opacity-0  transition-opacity duration-300"></div>
+
+        {/* Card content */}
+        <div className="relative bg-gradient-to-br from-gray-900 to-black border border-gray-800 overflow-hidden">
+          {/* Banner image with overlay */}
+          <div className="relative h-64 overflow-hidden">
+            <motion.img
+              src={event.banner}
+              alt={event.title}
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
+
+            {/* Floating date badge */}
+            <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-2 rounded-lg border border-gray-700 shadow-lg">
+              <div className="text-white font-medium flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 text-indigo-400" />
+                <span>{event.Date}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Event details */}
+          <div className="p-6 relative z-20">
+            <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors duration-300">
+              {event.title}
+            </h2>
+
+            <div className="space-y-3 mb-4">
+              <div className="flex items-center gap-2 text-gray-300">
+                <div className="bg-gray-800/80 p-2 rounded-lg">
+                  <MapPin className="w-4 h-4 text-indigo-400" />
+                </div>
+                <span className="text-sm">{event.Location}</span>
+              </div>
+
+              <div className="flex items-center gap-2 text-gray-300">
+                <div className="bg-gray-800/80 p-2 rounded-lg">
+                  <Monitor className="w-4 h-4 text-indigo-400" />
+                </div>
+                <span className="text-sm">Mode: {event.Mode}</span>
+              </div>
+            </div>
+
+            {/* View details button */}
+            <motion.button
+              className="w-full mt-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2.5 rounded-lg font-medium group-hover:shadow-lg group-hover:shadow-indigo-500/30 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              View Details
+            </motion.button>
+          </div>
+
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-indigo-600/20 to-transparent rounded-br-full"></div>
+          <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-purple-600/20 to-transparent rounded-tl-full"></div>
+        </div>
       </motion.div>
 
       <AnimatePresence>

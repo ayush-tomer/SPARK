@@ -120,18 +120,18 @@ export default function Navbar() {
       </div>
 
       {/* Profile Icon */}
-      <div className="hidden md:block fixed top-4 right-4">
+      <div className="hidden md:block fixed top-6 right-6">
         {user ? (
           <Link
             to="/profile"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 text-white text-lg font-bold leading-none cursor-pointer"
           >
             {user.displayName?.charAt(0).toUpperCase() ||
               user.email?.charAt(0).toUpperCase()}
           </Link>
         ) : (
           <div
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 cursor-pointer"
+            className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 cursor-pointer"
             onClick={handleGuestClick}
           >
             <img
@@ -144,10 +144,10 @@ export default function Navbar() {
       </div>
 
       {/* Admin Dashboard: */}
-      <div className="hidden md:block fixed top-3 left-9">
+      <div className="hidden md:block fixed top-6 left-6">
         <button className="text-sm gap-3 bg-purple-700 md:px-2 md:py-1.5 md:ml-2 rounded-xl">
           <Link to={"/admin"}>
-            <FaKeycdn size={46} className="text-gray-800" />
+            <img src="/adminLogin.webp" alt="Admin" className="w-9 h-9" />
           </Link>
         </button>
       </div>
