@@ -2,6 +2,8 @@ import Projects from "../Models/projects.model.js";
 
 //Posting of Project :
 export const CreateProject = async (req, res) => {
+  console.log("Received Data:", req.body); // 👀 Check incoming data
+
   const {
     Name,
     author,
@@ -12,22 +14,23 @@ export const CreateProject = async (req, res) => {
     category,
     image,
   } = req.body;
-  try {
-    if (
-      !Name ||
-      !author ||
-      !description ||
-      !TechStack ||
-      !GitHub ||
-      !ProblemStatement ||
-      !category ||
-      !image
-    ) {
-      return res
-        .status(400)
-        .json({ message: "No field can be empty", error: true });
-    }
 
+  if (
+    !Name?.trim() ||
+    !author?.trim() ||
+    !description?.trim() ||
+    !TechStack?.length ||
+    !GitHub?.trim() ||
+    !ProblemStatement?.trim() ||
+    !category?.trim() ||
+    !image?.trim()
+  ) {
+    return res
+      .status(400)
+      .json({ message: "No field can be empty", error: true });
+  }
+
+  try {
     const project = new Projects({
       Name,
       author,
@@ -41,14 +44,16 @@ export const CreateProject = async (req, res) => {
 
     await project.save();
 
-    res.status(200).json({
-      message: "Project has been created",
+    res.status(201).json({
+      message: "Project has been created successfully",
       error: false,
       data: project,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Issue", error: true });
+    console.error("Error in CreateProject:", error);
+    res
+      .status(500)
+      .json({ message: error.message || "Internal Server Issue", error: true });
   }
 };
 
@@ -146,7 +151,7 @@ export const DeleteProject = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Project deleted Successfully", error: true });
+      .json({ message: "Project deleted Successfully", error: false });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Issue", error: true });

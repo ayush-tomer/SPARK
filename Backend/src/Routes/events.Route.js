@@ -1,5 +1,5 @@
 import express from "express";
-import adminAuthenticate from "../Middlewares/admin.middleware.js";
+import adminAuthenticateToken from "../Middlewares/admin.middleware.js";
 import {
   createEvent,
   UpdateEvent,
@@ -10,13 +10,13 @@ import {
 const router = express.Router();
 
 //Create Event :
-router.post("/events-create", adminAuthenticate, createEvent);
+router.post("/events-create", adminAuthenticateToken, createEvent);
 
 //Update Event :
-router.put("/events-update/:id", adminAuthenticate, UpdateEvent);
+router.put("/events-update/:id", adminAuthenticateToken, UpdateEvent);
 
 //Delete Event :
-router.delete("/events-delete/:id", adminAuthenticate, DeleteEvent);
+router.delete("/events-delete/:id", adminAuthenticateToken, DeleteEvent);
 
 //Get Single Event :
 router.get("/events/:id", getSingleEvent);
