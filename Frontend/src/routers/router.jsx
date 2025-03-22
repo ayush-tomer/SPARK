@@ -34,6 +34,11 @@ import ManageProjects from "../pages/Admin/OpenSource/ManageProjects.jsx";
 import UpdateProject from "../pages/Admin/OpenSource/EditProjects.jsx";
 import AddProject from "../pages/Admin/OpenSource/CreateProject.jsx";
 
+//ProblemStatements :
+import ManageProblemStatements from "../pages/Admin/ProblemStatements/ManageProblemStatement.jsx";
+import AddProblemStatement from "../pages/Admin/ProblemStatements/AddProblems.jsx";
+import UpdateProblemStatement from "../pages/Admin/ProblemStatements/UpdateProblemStatement.jsx";
+
 const router = createBrowserRouter(
   [
     {
@@ -143,6 +148,30 @@ const router = createBrowserRouter(
           element: (
             <AdminRoute>
               <AddProject />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "manage-problemStatements",
+          element: (
+            <AdminRoute>
+              <ManageProblemStatements />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "add-new-problemStatements",
+          element: (
+            <AdminRoute>
+              <AddProblemStatement />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "update-problem-statements/:id",
+          element: (
+            <AdminRoute>
+              <UpdateProblemStatement />
             </AdminRoute>
           ),
         },
