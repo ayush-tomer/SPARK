@@ -258,7 +258,7 @@ export default function CommunityCard({ event }) {
               )}
             </div>
 
-            {/* Official Website Button */}
+            {/* Official Website Buttons */}
             <motion.button
               onClick={() => window.open(event.link, "_blank")}
               className=" w-1/3 py-2 text-white bg-blue-600/30 rounded-md"
