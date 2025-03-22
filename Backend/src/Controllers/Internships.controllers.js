@@ -111,14 +111,14 @@ export const CreateInternship = async (req, res) => {
 export const DeleteInternship = async (req, res) => {
   const { id } = req.params;
   try {
-    const internship = await Internship.findByOne({ _id: id });
+    const internship = await Internship.findOne({ _id: id });
     if (!internship) {
       return res
         .status(401)
         .json({ message: "No Internship Retrieved", error: true });
     }
 
-    await internship.findByIdAndDelete({ _id: id });
+    await internship.deleteOne({ _id: id });
     res
       .status(200)
       .json({ message: "Internship deleted Successfully", error: true });
@@ -240,7 +240,7 @@ export const GetInternships = async (req, res) => {
 export const GetInternship = async (req, res) => {
   const { id } = req.params;
   try {
-    const internship = await Internship.findById({ _id: id });
+    const internship = await Internship.findOne({ _id: id });
     if (!internship) {
       return res
         .status(401)

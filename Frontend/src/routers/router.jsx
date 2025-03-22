@@ -18,9 +18,16 @@ import AdminRoute from "./AdminRoutes.jsx";
 import DashboardLayout from "../pages/Admin/Dashboard/DashboardLayout.jsx";
 import AdminLogin from "../pages/Admin/Login/AdminLogin.jsx";
 import Dashboard from "../pages/Admin/Dashboard/Dashboard.jsx";
+
+//Community :
 import ManageCommunities from "../pages/Admin/Communities/ManageCommunities.jsx";
 import UpdateCommunity from "../pages/Admin/Communities/UpdateCommunity.jsx";
 import AddCommunity from "../pages/Admin/Communities/AddCommunity.jsx";
+
+//Internship:
+import AddInternship from "../pages/Admin/Internships/AddInternship.jsx";
+import ManageInternships from "../pages/Admin/Internships/ManageInternships.jsx";
+import UpdateInternship from "../pages/Admin/Internships/UpdateInternship.jsx";
 
 const router = createBrowserRouter(
   [
@@ -83,6 +90,30 @@ const router = createBrowserRouter(
           element: (
             <AdminRoute>
               <AddCommunity />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "add-new-internship",
+          element: (
+            <AdminRoute>
+              <AddInternship />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "manage-internships",
+          element: (
+            <AdminRoute>
+              <ManageInternships />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "update-internships/:id",
+          element: (
+            <AdminRoute>
+              <UpdateInternship />
             </AdminRoute>
           ),
         },
