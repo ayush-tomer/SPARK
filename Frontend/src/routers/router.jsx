@@ -29,6 +29,11 @@ import AddInternship from "../pages/Admin/Internships/AddInternship.jsx";
 import ManageInternships from "../pages/Admin/Internships/ManageInternships.jsx";
 import UpdateInternship from "../pages/Admin/Internships/UpdateInternship.jsx";
 
+//Projects:
+import ManageProjects from "../pages/Admin/OpenSource/ManageProjects.jsx";
+import UpdateProject from "../pages/Admin/OpenSource/EditProjects.jsx";
+import AddProject from "../pages/Admin/OpenSource/CreateProject.jsx";
+
 const router = createBrowserRouter(
   [
     {
@@ -114,6 +119,30 @@ const router = createBrowserRouter(
           element: (
             <AdminRoute>
               <UpdateInternship />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "manage-projects",
+          element: (
+            <AdminRoute>
+              <ManageProjects />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "update-projects/:id",
+          element: (
+            <AdminRoute>
+              <UpdateProject />
+            </AdminRoute>
+          ),
+        },
+        {
+          path: "add-new-project",
+          element: (
+            <AdminRoute>
+              <AddProject />
             </AdminRoute>
           ),
         },

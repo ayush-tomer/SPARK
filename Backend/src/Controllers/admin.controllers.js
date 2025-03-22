@@ -6,6 +6,7 @@ import generateToken from "../Lib/utilis.js";
 import Community from "../Models/communities.model.js";
 import Projects from "../Models/projects.model.js";
 import Internship from "../Models/internships.model.js";
+import problemStatement from "../Models/problemStatement.model.js";
 
 //Register :
 export const Register = async (req, res) => {
@@ -93,8 +94,14 @@ export const getAdmindashboard = async (req, res) => {
     const totalCommunities = await Community.countDocuments();
     const totalProjects = await Projects.countDocuments();
     const totalInternships = await Internship.countDocuments();
+    const totalproblemStatement = await problemStatement.countDocuments();
 
-    res.json({ totalCommunities, totalProjects, totalInternships });
+    res.json({
+      totalCommunities,
+      totalProjects,
+      totalInternships,
+      totalproblemStatement,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: true, message: "Internal Server Issue" });
