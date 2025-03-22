@@ -20,7 +20,7 @@ export const createPost = async ({ content, imageFile, user }) => {
       formData.append("file", imageFile);
       formData.append("upload_preset", "your_upload_preset");
 
-      const res = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dkg4enwlp/image/upload", {
         method: "POST",
         body: formData,
       });
@@ -64,7 +64,7 @@ export const updatePost = async ({ postId, newContent, newImageFile }) => {
       formData.append("file", newImageFile);
       formData.append("upload_preset", "your_upload_preset");
 
-      const res = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dkg4enwlp/image/upload", {
         method: "POST",
         body: formData,
       });
