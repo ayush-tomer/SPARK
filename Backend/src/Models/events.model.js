@@ -40,19 +40,12 @@ const eventSchema = new mongoose.Schema({
   },
   Social: [
     {
-      question: {
-        type: String,
-        required: true,
-      },
-      answers: {
-        type: String,
-        required: String,
-      },
+      Link: { type: String, required: true },
     },
   ],
   PricePool: [
     {
-      First: { type: String, requirede: true },
+      First: { type: String, required: true },
       Second: { type: String, required: true },
       Third: { type: String, required: true },
     },
