@@ -78,7 +78,7 @@ export const CreateStatement = async (req, res) => {
 export const DeleteStatement = async (req, res) => {
   const { id } = req.params;
   try {
-    const statement = await problemStatement.findById(id);
+    const statement = await problemStatement.findOne({ _id: id });
     if (!statement) {
       return res.status(404).json({
         message: "Problem statement not found",
@@ -86,7 +86,7 @@ export const DeleteStatement = async (req, res) => {
       });
     }
 
-    await problemStatement.findByIdAndDelete(id);
+    await problemStatement.DeleteOne(id);
     res.status(200).json({
       message: "Problem statement deleted successfully",
       error: false,
