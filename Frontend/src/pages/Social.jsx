@@ -1,9 +1,10 @@
 import React from 'react'
+import Post from '../components/Social/Post'
 
-function Social() {
+export default function Social() {
   return (
-    <div>Social</div>
+    <div>
+        <Post />
+    </div>
   )
 }
-
-export default Social

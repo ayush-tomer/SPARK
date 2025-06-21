@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const CommunityScehama = new mongoose.Schema({
+  image: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   title: {
     type: String,
     unique: true,
@@ -18,6 +23,10 @@ const CommunityScehama = new mongoose.Schema({
     type: Number,
   },
   url: {
+    type: String,
+    required: true,
+  },
+  college: {
     type: String,
     required: true,
   },

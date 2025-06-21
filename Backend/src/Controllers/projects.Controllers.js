@@ -2,22 +2,35 @@ import Projects from "../Models/projects.model.js";
 
 //Posting of Project :
 export const CreateProject = async (req, res) => {
-  const { Name, author, description, TechStack, GitHub, ProblemStatement } =
-    req.body;
-  try {
-    if (
-      !Name ||
-      !author ||
-      !description ||
-      !TechStack ||
-      !GitHub ||
-      !ProblemStatement
-    ) {
-      return res
-        .status(400)
-        .json({ message: "No field can be empty", error: true });
-    }
+  console.log("Received Data:", req.body); // 👀 Check incoming data
 
+  const {
+    Name,
+    author,
+    description,
+    TechStack,
+    GitHub,
+    ProblemStatement,
+    category,
+    image,
+  } = req.body;
+
+  if (
+    !Name?.trim() ||
+    !author?.trim() ||
+    !description?.trim() ||
+    !TechStack?.length ||
+    !GitHub?.trim() ||
+    !ProblemStatement?.trim() ||
+    !category?.trim() ||
+    !image?.trim()
+  ) {
+    return res
+      .status(400)
+      .json({ message: "No field can be empty", error: true });
+  }
+
+  try {
     const project = new Projects({
       Name,
       author,
@@ -25,26 +38,38 @@ export const CreateProject = async (req, res) => {
       TechStack,
       GitHub,
       ProblemStatement,
+      category,
+      image,
     });
 
     await project.save();
 
-    res.status(200).json({
-      message: "Project has been created",
+    res.status(201).json({
+      message: "Project has been created successfully",
       error: false,
       data: project,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Issue", error: true });
+    console.error("Error in CreateProject:", error);
+    res
+      .status(500)
+      .json({ message: error.message || "Internal Server Issue", error: true });
   }
 };
 
 //Updating Movie :
 export const UpdateProject = async (req, res) => {
   const { id } = req.params;
-  const { Name, author, description, TechStack, GitHub, ProblemStatement } =
-    req.body;
+  const {
+    Name,
+    author,
+    description,
+    TechStack,
+    GitHub,
+    ProblemStatement,
+    category,
+    image,
+  } = req.body;
   try {
     if (
       !Name &&
@@ -52,7 +77,9 @@ export const UpdateProject = async (req, res) => {
       !description &&
       !TechStack &&
       !GitHub &&
-      !ProblemStatement
+      !ProblemStatement &&
+      !category &&
+      !image
     ) {
       return res
         .status(400)
@@ -89,6 +116,12 @@ export const UpdateProject = async (req, res) => {
     if (ProblemStatement) {
       project.ProblemStatement = ProblemStatement;
     }
+    if (category) {
+      project.category = category;
+    }
+    if (image) {
+      project.image = image;
+    }
 
     await project.save();
     res.status(200).json({
@@ -118,7 +151,7 @@ export const DeleteProject = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Project deleted Successfully", error: true });
+      .json({ message: "Project deleted Successfully", error: false });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Issue", error: true });
